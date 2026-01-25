@@ -1,7 +1,7 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import type { Icon } from "@phosphor-icons/react";
-import { GithubLogoIcon, LinkedinLogoIcon, XLogoIcon } from "@phosphor-icons/react";
+import { GlobeIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { BrandIcon } from "@/components/ui/brand-icon";
@@ -25,23 +25,19 @@ type SocialLink = {
 };
 
 const getResourceLinks = (): FooterLinkItem[] => [
-	{ url: "https://docs.rxresu.me", label: t`Documentation` },
-	{ url: "https://github.com/amruthpillai/reactive-resume", label: t`Source Code` },
-	{ url: "https://crowdin.com/project/reactive-resume", label: t`Translations` },
-	{ url: "https://opencollective.com/reactive-resume", label: t`Donate` },
+	{ url: "https://juvakelteam.co.zw", label: t`Juvakel Portal` },
+	{ url: "https://juvakelteam.co.zw/terms", label: t`Terms` },
+	{ url: "https://juvakelteam.co.zw/privacy", label: t`Privacy` },
+	{ url: "https://juvakelteam.co.zw/contact", label: t`Support` },
 ];
 
 const getCommunityLinks = (): FooterLinkItem[] => [
-	{ url: "https://github.com/amruthpillai/reactive-resume/discussions", label: t`Discussions` },
-	{ url: "https://github.com/amruthpillai/reactive-resume/issues", label: t`Report an Issue` },
-	{ url: "https://crowdin.com/project/reactive-resume", label: t`Translations` },
-	{ url: "https://github.com/amruthpillai/reactive-resume/blob/main/CONTRIBUTING.md", label: t`Contributing` },
+	{ url: "https://juvakelteam.co.zw/about", label: t`About` },
+	{ url: "https://juvakelteam.co.zw/contact", label: t`Contact` },
 ];
 
 const socialLinks: SocialLink[] = [
-	{ url: "https://github.com/amruthpillai/reactive-resume", label: "GitHub", icon: GithubLogoIcon },
-	{ url: "https://linkedin.com/in/amruthpillai", label: "LinkedIn", icon: LinkedinLogoIcon },
-	{ url: "https://x.com/KingOKings", label: "X (Twitter)", icon: XLogoIcon },
+	{ url: "https://juvakelteam.co.zw", label: "Juvakel", icon: GlobeIcon },
 ];
 
 export function Footer() {
@@ -60,11 +56,10 @@ export function Footer() {
 					<BrandIcon variant="logo" className="size-10" />
 
 					<div className="space-y-2">
-						<h2 className="font-bold text-lg tracking-tight">Reactive Resume</h2>
+						<h2 className="font-bold text-lg tracking-tight">Juvakel Resume Builder</h2>
 						<p className="max-w-xs text-muted-foreground text-sm leading-relaxed">
 							<Trans>
-								A free and open-source resume builder that simplifies the process of creating, updating, and sharing
-								your resume.
+								Build, customize, and share professional resumes in minutes with Juvakel.
 							</Trans>
 						</p>
 					</div>

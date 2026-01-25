@@ -6,44 +6,25 @@ export const env = createEnv({
 	runtimeEnv: process.env,
 	emptyStringAsUndefined: true,
 
-	client: {},
+	client: {
+		VITE_API_BASE_URL: z.url({ protocol: /https?/ }).optional(),
+		VITE_CANDIDATE_PORTAL_URL: z.url({ protocol: /https?/ }).optional(),
+		VITE_APP_BASE_PATH: z.string().optional(),
+	},
 
 	server: {
 		// Server
 		TZ: z.string().default("Etc/UTC"),
 		APP_URL: z.url({ protocol: /https?/ }),
+		API_BASE_URL: z.url({ protocol: /https?/ }).optional(),
 		PRINTER_APP_URL: z.url({ protocol: /https?/ }).optional(),
 
 		// Printer
 		PRINTER_ENDPOINT: z.url({ protocol: /^(wss?|https?)$/ }),
 
 		// Database
-		DATABASE_URL: z.url({ protocol: /postgres(ql)?/ }),
-
-		// Authentication
+		// Authentication (used for printer token signing)
 		AUTH_SECRET: z.string().min(1),
-
-		// Social Auth (Google)
-		GOOGLE_CLIENT_ID: z.string().min(1).optional(),
-		GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
-
-		// Social Auth (GitHub)
-		GITHUB_CLIENT_ID: z.string().min(1).optional(),
-		GITHUB_CLIENT_SECRET: z.string().min(1).optional(),
-
-		// Custom OAuth Provider
-		OAUTH_PROVIDER_NAME: z.string().min(1).optional(),
-		OAUTH_CLIENT_ID: z.string().min(1).optional(),
-		OAUTH_CLIENT_SECRET: z.string().min(1).optional(),
-		OAUTH_DISCOVERY_URL: z.url({ protocol: /https?/ }).optional(),
-		OAUTH_AUTHORIZATION_URL: z.url({ protocol: /https?/ }).optional(),
-		OAUTH_TOKEN_URL: z.url({ protocol: /https?/ }).optional(),
-		OAUTH_USER_INFO_URL: z.url({ protocol: /https?/ }).optional(),
-		OAUTH_SCOPES: z
-			.string()
-			.min(1)
-			.transform((value) => value.split(" "))
-			.default(["openid", "profile", "email"]),
 
 		// Email (SMTP)
 		SMTP_HOST: z.string().min(1).optional(),

@@ -1,3 +1,5 @@
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "@fontsource-variable/ibm-plex-sans";
 import "@phosphor-icons/web/regular/style.css";
 
@@ -31,26 +33,31 @@ type RouterContext = {
 	flags: FeatureFlags;
 };
 
-const appName = "Reactive Resume";
-const tagline = "A free and open-source resume builder";
-const title = `${appName} — ${tagline}`;
+const appName = "Juvakel Resume Builder";
+const tagline = "Build, customize, and share resumes in minutes";
+const title = `${appName} - ${tagline}`;
 const description =
-	"Reactive Resume is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.";
+	"Juvakel Resume Builder helps you create, customize, and share professional resumes in minutes.";
 
 await loadLocale(await getLocale());
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	shellComponent: RootDocument,
 	head: () => {
-		const appUrl = process.env.APP_URL ?? "https://rxresu.me/";
+		const appUrl = process.env.APP_URL ?? "https://portal.juvakelteam.co.zw";
+		const assetUrl = (path: string) => new URL(path, appUrl).toString();
 
 		return {
 			links: [
 				{ rel: "stylesheet", href: appCss },
 				// Icons
-				{ rel: "icon", href: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
-				{ rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
-				{ rel: "apple-touch-icon", href: "/apple-touch-icon-180x180.png", type: "image/png", sizes: "180x180" },
+				{ rel: "icon", href: assetUrl("/favicon.ico"), type: "image/x-icon", sizes: "48x48" },
+				{
+					rel: "apple-touch-icon",
+					href: assetUrl("/apple-touch-icon-180x180.png"),
+					type: "image/png",
+					sizes: "180x180",
+				},
 			],
 			meta: [
 				{ title },
@@ -58,12 +65,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				{ name: "description", content: description },
 				{ name: "viewport", content: "width=device-width, initial-scale=1" },
 				// Twitter Tags
-				{ property: "twitter:image", content: `${appUrl}/opengraph/banner.jpg` },
+				{ property: "twitter:image", content: `${appUrl}/opengraph/banner.png` },
 				{ property: "twitter:card", content: "summary_large_image" },
 				{ property: "twitter:title", content: title },
 				{ property: "twitter:description", content: description },
 				// OpenGraph Tags
-				{ property: "og:image", content: `${appUrl}/opengraph/banner.jpg` },
+				{ property: "og:image", content: `${appUrl}/opengraph/banner.png` },
 				{ property: "og:site_name", content: appName },
 				{ property: "og:title", content: title },
 				{ property: "og:description", content: description },
@@ -72,12 +79,21 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 		};
 	},
 	beforeLoad: async () => {
-		const [theme, locale, session, flags] = await Promise.all([
-			getTheme(),
-			getLocale(),
-			getSession(),
-			client.flags.get(),
-		]);
+		const [theme, locale] = await Promise.all([getTheme(), getLocale()]);
+		let session: AuthSession | null = null;
+		let flags: FeatureFlags = { disableSignups: false, disableEmailAuth: false };
+
+		try {
+			session = await getSession();
+		} catch {
+			session = null;
+		}
+
+		try {
+			flags = await client.flags.get();
+		} catch {
+			flags = { disableSignups: false, disableEmailAuth: false };
+		}
 
 		return { theme, locale, session, flags };
 	},

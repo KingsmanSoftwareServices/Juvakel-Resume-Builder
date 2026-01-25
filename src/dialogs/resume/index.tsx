@@ -21,7 +21,6 @@ import {
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
-import { authClient } from "@/integrations/auth/client";
 import { orpc, type RouterInput } from "@/integrations/orpc/client";
 import { generateId, generateRandomName, slugify } from "@/utils/string";
 import { type DialogProps, useDialogStore } from "../store";
@@ -281,11 +280,11 @@ export function DuplicateResumeDialog({ data }: DialogProps<"resume.duplicate">)
 
 function ResumeForm() {
 	const form = useFormContext<FormValues>();
-	const { data: session } = authClient.useSession();
 
 	const slugPrefix = useMemo(() => {
-		return `${window.location.origin}/${session?.user.username ?? ""}/`;
-	}, [session]);
+		if (typeof window === "undefined") return "";
+		return `${window.location.origin}/r/`;
+	}, []);
 
 	const onGenerateName = () => {
 		form.setValue("name", generateRandomName(), { shouldDirty: true });

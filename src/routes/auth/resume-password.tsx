@@ -20,7 +20,7 @@ const searchSchema = z.object({
 	redirect: z
 		.string()
 		.min(1)
-		.regex(/^\/[^/]+\/[^/]+$/),
+		.regex(/^\/r\/[^/]+$/),
 });
 
 export const Route = createFileRoute("/auth/resume-password")({
@@ -46,10 +46,10 @@ function RouteComponent() {
 
 	const { mutate: verifyPassword } = useMutation(orpc.auth.verifyResumePassword.mutationOptions());
 
-	const [username, slug] = useMemo(() => {
-		const [username, slug] = redirect.split("/").slice(1) as [string, string];
-		if (!username || !slug) throw navigate({ to: "/" });
-		return [username, slug];
+	const resumeId = useMemo(() => {
+		const resumeId = redirect.split("/").slice(2)[0];
+		if (!resumeId) throw navigate({ to: "/" });
+		return resumeId;
 	}, [redirect, navigate]);
 
 	const form = useForm<FormValues>({
@@ -63,7 +63,7 @@ function RouteComponent() {
 		const toastId = toast.loading(t`Verifying password...`);
 
 		verifyPassword(
-			{ username, slug, password: data.password },
+			{ id: resumeId, password: data.password },
 			{
 				onSuccess: () => {
 					toast.dismiss(toastId);

@@ -12,17 +12,32 @@ import { getTheme } from "./utils/theme";
 
 export const getRouter = async () => {
 	const queryClient = getQueryClient();
+	const basePathRaw = import.meta.env.VITE_APP_BASE_PATH ?? "/";
+	const basepath =
+		basePathRaw === "/"
+			? "/"
+			: `/${basePathRaw.replace(/^\/|\/$/g, "")}`;
 
-	const [theme, locale, session, flags] = await Promise.all([
-		getTheme(),
-		getLocale(),
-		getSession(),
-		client.flags.get(),
-	]);
+	const [theme, locale] = await Promise.all([getTheme(), getLocale()]);
+	let session = null;
+	let flags = { disableSignups: false, disableEmailAuth: false };
+
+	try {
+		session = await getSession();
+	} catch {
+		session = null;
+	}
+
+	try {
+		flags = await client.flags.get();
+	} catch {
+		flags = { disableSignups: false, disableEmailAuth: false };
+	}
 
 	await loadLocale(locale);
 
 	const router = createRouter({
+		basepath,
 		routeTree,
 		scrollRestoration: true,
 		defaultPreload: "intent",

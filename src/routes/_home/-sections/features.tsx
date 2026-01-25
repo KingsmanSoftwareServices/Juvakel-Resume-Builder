@@ -1,14 +1,12 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import {
-	CloudArrowUpIcon,
 	CodeSimpleIcon,
 	CurrencyDollarIcon,
 	DatabaseIcon,
 	DotsThreeIcon,
 	FileCssIcon,
 	FilesIcon,
-	GithubLogoIcon,
 	GlobeIcon,
 	type Icon,
 	KeyIcon,
@@ -41,10 +39,10 @@ const getFeatures = (): Feature[] => [
 		description: t`Completely free, forever, no hidden costs.`,
 	},
 	{
-		id: "open-source",
-		icon: GithubLogoIcon,
-		title: t`Open Source`,
-		description: t`By the community, for the community.`,
+		id: "portal",
+		icon: KeyIcon,
+		title: t`Portal Access`,
+		description: t`Sign in once and access your resumes across the Juvakel portal.`,
 	},
 	{
 		id: "no-ads",
@@ -59,28 +57,22 @@ const getFeatures = (): Feature[] => [
 		description: t`Your data is secure, and never shared or sold to anyone.`,
 	},
 	{
-		id: "self-host",
-		icon: CloudArrowUpIcon,
-		title: t`Self-Host with Docker`,
-		description: t`You also have the option to deploy on your own servers using the Docker image.`,
-	},
-	{
 		id: "languages",
 		icon: TranslateIcon,
 		title: t`Multilingual`,
-		description: t`Available in multiple languages. If you would like to contribute, check out Crowdin.`,
+		description: t`Choose your preferred language in the settings.`,
 	},
 	{
-		id: "auth",
-		icon: KeyIcon,
-		title: t`One-Click Sign-In`,
-		description: t`Sign in with GitHub, Google or a custom OAuth provider.`,
-	},
-	{
-		id: "2fa",
+		id: "security",
 		icon: ShieldCheckIcon,
-		title: t`Passkeys & 2FA`,
-		description: t`Enhance the security of your account with additional layers of protection.`,
+		title: t`Secure Access`,
+		description: t`Email verification and optional two-factor authentication.`,
+	},
+	{
+		id: "sync",
+		icon: DatabaseIcon,
+		title: t`Profile Sync`,
+		description: t`Your resume data stays connected to your Juvakel profile.`,
 	},
 	{
 		id: "unlimited-resumes",
@@ -184,8 +176,7 @@ export function Features() {
 
 				<p className="max-w-2xl text-muted-foreground leading-relaxed">
 					<Trans>
-						Everything you need to create, customize, and share professional resumes. Built with privacy in mind,
-						powered by open source, and completely free forever.
+						Everything you need to create, customize, and share professional resumes, all within the Juvakel portal.
 					</Trans>
 				</p>
 			</motion.div>

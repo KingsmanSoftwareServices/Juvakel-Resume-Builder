@@ -18,13 +18,11 @@ import { toast } from "sonner";
 import { useCopyToClipboard } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { authClient } from "@/integrations/auth/client";
 import { orpc } from "@/integrations/orpc/client";
 import { downloadFromUrl, downloadWithAnchor, generateFilename } from "@/utils/file";
 import { cn } from "@/utils/style";
 
 export function BuilderDock() {
-	const { data: session } = authClient.useSession();
 	const params = useParams({ from: "/builder/$resumeId" });
 
 	const [_, copyToClipboard] = useCopyToClipboard();
@@ -36,9 +34,9 @@ export function BuilderDock() {
 	);
 
 	const publicUrl = useMemo(() => {
-		if (!session?.user.username || !resume?.slug) return "";
-		return `${window.location.origin}/${session.user.username}/${resume.slug}`;
-	}, [session?.user.username, resume?.slug]);
+		if (!resume) return "";
+		return `${window.location.origin}/r/${resume.id}`;
+	}, [resume]);
 
 	const onCopyUrl = useCallback(async () => {
 		await copyToClipboard(publicUrl);

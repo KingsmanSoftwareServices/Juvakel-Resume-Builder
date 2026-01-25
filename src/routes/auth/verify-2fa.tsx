@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { ArrowLeftIcon, CheckIcon } from "@phosphor-icons/react";
+import { ArrowLeftIcon, CheckIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react";
 import { createFileRoute, Link, redirect, useNavigate, useRouter } from "@tanstack/react-router";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useForm } from "react-hook-form";
@@ -11,11 +11,16 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp";
 import { authClient } from "@/integrations/auth/client";
+import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 export const Route = createFileRoute("/auth/verify-2fa")({
 	component: RouteComponent,
 	beforeLoad: async ({ context }) => {
 		if (context.session) throw redirect({ to: "/dashboard", replace: true });
+		if (typeof window !== "undefined") {
+			window.location.assign(getCandidateAuthUrl(window.location.href, "verify-2fa"));
+		}
+		throw redirect({ to: "/", replace: true });
 	},
 });
 
@@ -60,7 +65,7 @@ function RouteComponent() {
 					<Trans>Two-Factor Authentication</Trans>
 				</h1>
 				<div className="text-muted-foreground">
-					<Trans>Enter the verification code from your authenticator app</Trans>
+					<Trans>Enter the 6-digit code sent to your email</Trans>
 				</div>
 			</div>
 
@@ -112,10 +117,27 @@ function RouteComponent() {
 						</Button>
 					</div>
 				</form>
-				<Button type="button" variant="link" className="h-auto justify-self-center p-0 text-sm" asChild>
-					<Link to="/auth/verify-2fa-backup">
-						<Trans>Lost access to your authenticator?</Trans>
-					</Link>
+				<Button
+					type="button"
+					variant="link"
+					className="h-auto justify-self-center p-0 text-sm"
+					onClick={async () => {
+						const email = typeof window !== "undefined" ? localStorage.getItem("pendingEmail") : null;
+						if (!email) {
+							toast.error(t`Missing pending login email.`);
+							return;
+						}
+						const toastId = toast.loading(t`Sending a new code...`);
+						const { error } = await authClient.resendOtp({ email });
+						if (error) {
+							toast.error(error.message, { id: toastId });
+							return;
+						}
+						toast.success(t`New code sent`, { id: toastId });
+					}}
+				>
+					<EnvelopeSimpleIcon />
+					<Trans>Resend code</Trans>
 				</Button>
 			</Form>
 		</>

@@ -4,24 +4,23 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
-import type { Plugin } from "vite";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
-// Polyfill for Reflect.getMetadata() (required by @better-auth/passkey)
-const REFLECT_POLYFILL = `if("function"!=typeof Reflect.getMetadata){const e=new WeakMap,t=(t,a)=>e.get(t)?.get(a),a=(t,a)=>{let n=e.get(t);n||(n=new Map,e.set(t,n));let f=n.get(a);return f||(f=new Map,n.set(a,f)),f},n=(e,a,f)=>{const c=t(a,f);if(c?.has(e))return c.get(e);const s=Object.getPrototypeOf(a);return s?n(e,s,f):void 0};Reflect.getMetadata=(e,t,a)=>n(e,t,a),Reflect.getOwnMetadata=(e,a,n)=>t(a,n)?.get(e),Reflect.defineMetadata=(e,t,n,f)=>a(n,f).set(e,t),Reflect.hasMetadata=(e,t,a)=>void 0!==n(e,t,a),Reflect.hasOwnMetadata=(e,a,n)=>t(a,n)?.has(e)??!1,Reflect.metadata=(e,t)=>(n,f)=>a(n,f).set(e,t)};`;
+const normalizeBasePath = (input: string) => {
+	const trimmed = input.trim();
+	if (!trimmed || trimmed === "/") return "/";
+	const withLeading = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+	return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
+};
 
-function reflectPolyfillPlugin(): Plugin {
+const config = defineConfig(({ mode }) => {
+	const env = loadEnv(mode, process.cwd(), "");
+	const basePath = normalizeBasePath(env.VITE_APP_BASE_PATH ?? "/");
+	const port = Number(env.PORT ?? 3000);
+	const pwaBase = basePath === "/" ? "/" : basePath;
+
 	return {
-		name: "reflect-polyfill",
-		renderChunk(code, chunk) {
-			if (chunk.fileName.includes("passkey")) return `${REFLECT_POLYFILL}\n${code}`;
-			return null;
-		},
-	};
-}
-
-const config = defineConfig({
 	define: {
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
 	},
@@ -53,22 +52,23 @@ const config = defineConfig({
 		},
 	},
 
+	base: basePath,
+
 	server: {
 		host: true,
-		port: 3000,
+		port,
 		strictPort: true,
 		allowedHosts: true,
 		hmr: {
 			host: "localhost",
-			port: 3000,
+			port,
 		},
 	},
 
 	plugins: [
-		reflectPolyfillPlugin(),
 		lingui(),
 		tailwindcss(),
-		nitro({ plugins: ["plugins/1.migrate.ts"] }),
+		nitro(),
 		tanstackStart({ router: { semicolons: true, quoteStyle: "double" } }),
 		viteReact({ babel: { plugins: [["@lingui/babel-plugin-lingui-macro"]] } }),
 		VitePWA({
@@ -82,15 +82,15 @@ const config = defineConfig({
 				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10mb
 			},
 			manifest: {
-				name: "Reactive Resume",
-				short_name: "Reactive Resume",
-				description: "A free and open-source resume builder.",
-				id: "/?source=pwa",
-				start_url: "/?source=pwa",
+				name: "Juvakel Resume Builder",
+				short_name: "Juvakel Resume Builder",
+				description: "Build, customize, and share professional resumes in minutes.",
+				id: `${pwaBase}?source=pwa`,
+				start_url: `${pwaBase}?source=pwa`,
 				display: "standalone",
 				orientation: "portrait",
-				theme_color: "#09090B",
-				background_color: "#09090B",
+				theme_color: "#2a1a54",
+				background_color: "#ffffff",
 				icons: [
 					{
 						src: "favicon.ico",
@@ -178,29 +178,11 @@ const config = defineConfig({
 						label: "Template Selector",
 					},
 				],
-				categories: [
-					"ai",
-					"builder",
-					"business",
-					"career",
-					"cv",
-					"editor",
-					"free",
-					"generator",
-					"job-search",
-					"multilingual",
-					"open-source",
-					"privacy",
-					"productivity",
-					"resume",
-					"self-hosted",
-					"templates",
-					"utilities",
-					"writing",
-				],
+				categories: ["builder", "business", "career", "cv", "editor", "job-search", "productivity", "resume", "templates"],
 			},
 		}),
 	],
+	};
 });
 
 export default config;

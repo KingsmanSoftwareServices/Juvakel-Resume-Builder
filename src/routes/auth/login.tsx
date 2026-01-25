@@ -3,28 +3,30 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { ArrowRightIcon, EyeIcon, EyeSlashIcon } from "@phosphor-icons/react";
 import { createFileRoute, Link, redirect, useNavigate, useRouter } from "@tanstack/react-router";
-import type { BetterFetchOption } from "better-auth/client";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useToggle } from "usehooks-ts";
 import z from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/integrations/auth/client";
-import { SocialAuth } from "./-components/social-auth";
+import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 export const Route = createFileRoute("/auth/login")({
 	component: RouteComponent,
 	beforeLoad: async ({ context }) => {
 		if (context.session) throw redirect({ to: "/dashboard", replace: true });
-		return { session: null };
+		if (typeof window !== "undefined") {
+			window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+		}
+		throw redirect({ to: "/", replace: true });
 	},
 });
 
 const formSchema = z.object({
-	identifier: z.string().trim().toLowerCase(),
-	password: z.string().trim().min(6).max(64),
+	email: z.string().trim().toLowerCase().email(),
+	password: z.string().trim().min(8).max(64),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -38,46 +40,38 @@ function RouteComponent() {
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			identifier: "",
+			email: "",
 			password: "",
 		},
 	});
 
 	const onSubmit = async (data: FormValues) => {
 		const toastId = toast.loading(t`Signing in...`);
+		const { data: result, error } = await authClient.signIn.email({
+			email: data.email,
+			password: data.password,
+		});
 
-		const fetchOptions: BetterFetchOption = {
-			onSuccess: (context) => {
-				// Check if 2FA is required
-				if (context.data && "twoFactorRedirect" in context.data && context.data.twoFactorRedirect) {
-					toast.dismiss(toastId);
-					navigate({ to: "/auth/verify-2fa", replace: true });
-					return;
-				}
-
-				// Normal login success
-				router.invalidate();
-				toast.dismiss(toastId);
-				navigate({ to: "/dashboard", replace: true });
-			},
-			onError: ({ error }) => {
-				toast.error(error.message, { id: toastId });
-			},
-		};
-
-		if (data.identifier.includes("@")) {
-			await authClient.signIn.email({
-				email: data.identifier,
-				password: data.password,
-				fetchOptions,
-			});
-		} else {
-			await authClient.signIn.username({
-				username: data.identifier,
-				password: data.password,
-				fetchOptions,
-			});
+		if (error) {
+			toast.error(error.message, { id: toastId });
+			return;
 		}
+
+		if (result?.requires2FA) {
+			toast.dismiss(toastId);
+			navigate({ to: "/auth/verify-2fa", replace: true });
+			return;
+		}
+
+		if (result?.requiresEmailVerification) {
+			toast.dismiss(toastId);
+			toast.message(t`Email verification required. Check your inbox.`);
+			return;
+		}
+
+		router.invalidate();
+		toast.dismiss(toastId);
+		navigate({ to: "/dashboard", replace: true });
 	};
 
 	return (
@@ -106,7 +100,7 @@ function RouteComponent() {
 					<form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
 						<FormField
 							control={form.control}
-							name="identifier"
+							name="email"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>
@@ -116,9 +110,6 @@ function RouteComponent() {
 										<Input autoComplete="email" placeholder="john.doe@example.com" className="lowercase" {...field} />
 									</FormControl>
 									<FormMessage />
-									<FormDescription>
-										<Trans>You can also use your username to login.</Trans>
-									</FormDescription>
 								</FormItem>
 							)}
 						/>
@@ -166,7 +157,6 @@ function RouteComponent() {
 				</Form>
 			)}
 
-			<SocialAuth />
 		</>
 	);
 }

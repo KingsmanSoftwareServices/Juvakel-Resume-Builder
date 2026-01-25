@@ -7,7 +7,7 @@ export const printerRouter = {
 	printResumeAsPDF: publicProcedure
 		.route({
 			method: "GET",
-			path: "/printer/resume/{id}/pdf",
+			path: "/printer/printResumeAsPDF",
 			tags: ["Resume", "Printer"],
 			summary: "Export resume as PDF",
 			description: "Export a resume as a PDF. Returns a URL to download the PDF.",
@@ -28,7 +28,7 @@ export const printerRouter = {
 	getResumeScreenshot: protectedProcedure
 		.route({
 			method: "GET",
-			path: "/printer/resume/{id}/screenshot",
+			path: "/printer/getResumeScreenshot",
 			tags: ["Resume", "Printer"],
 			summary: "Get resume screenshot",
 			description: "Get a screenshot of a resume. Returns a URL to the screenshot image.",

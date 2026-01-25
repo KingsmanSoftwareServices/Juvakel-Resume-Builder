@@ -33,14 +33,14 @@ async function handler({ request }: { request: Request }) {
 	if (request.method === "GET" && request.url.endsWith("/spec.json")) {
 		const spec = await openAPIGenerator.generate(router, {
 			info: {
-				title: "Reactive Resume",
+				title: "Juvakel Resume Builder",
 				version: "5.0.0",
-				description: "Reactive Resume API",
-				license: { name: "MIT", url: "https://github.com/amruthpillai/reactive-resume/blob/main/LICENSE" },
-				contact: { name: "Amruth Pillai", email: "hello@amruthpillai.com", url: "https://amruthpillai.com" },
+				description: "Juvakel Resume Builder API",
+				license: { name: "MIT" },
+				contact: { name: "Juvakel Team", url: "https://juvakelteam.co.zw" },
 			},
 			servers: [{ url: `${env.APP_URL}/api/openapi` }],
-			externalDocs: { url: "https://docs.rxresu.me", description: "Reactive Resume Documentation" },
+			externalDocs: { url: "https://juvakelteam.co.zw", description: "Juvakel Documentation" },
 			components: {
 				securitySchemes: {
 					apiKey: {

@@ -38,7 +38,7 @@ export const storageRouter = {
 			}
 
 			const result = await uploadFile({
-				userId: context.user.id,
+				userId: context.user.userId,
 				data,
 				contentType,
 				type: "picture",
@@ -60,7 +60,7 @@ export const storageRouter = {
 			// We need to extract just the path portion that matches the storage key
 			const key = input.filename.startsWith("uploads/")
 				? input.filename
-				: `uploads/${context.user.id}/pictures/${input.filename}`;
+				: `uploads/${context.user.userId}/pictures/${input.filename}`;
 
 			const deleted = await storageService.delete(key);
 

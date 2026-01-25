@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/integrations/auth/client";
+import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 const searchSchema = z.object({ token: z.string().min(1) });
 
@@ -19,11 +20,26 @@ export const Route = createFileRoute("/auth/reset-password")({
 	component: RouteComponent,
 	validateSearch: zodValidator(searchSchema),
 	beforeLoad: async ({ context }) => {
-		if (context.flags.disableEmailAuth) throw redirect({ to: "/auth/login", replace: true });
+		if (context.flags.disableEmailAuth) {
+			if (typeof window !== "undefined") {
+				window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+			}
+			throw redirect({ to: "/", replace: true });
+		}
+		if (typeof window !== "undefined") {
+			const baseUrl = import.meta.env.VITE_CANDIDATE_PORTAL_URL ?? window.location.origin;
+			const resetUrl = new URL("/reset-password", baseUrl);
+			resetUrl.search = window.location.search;
+			window.location.assign(resetUrl.toString());
+		}
+		throw redirect({ to: "/", replace: true });
 	},
 	onError: (error) => {
 		if (error instanceof SearchParamError) {
-			throw redirect({ to: "/auth/login" });
+			if (typeof window !== "undefined") {
+				window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+			}
+			throw redirect({ to: "/", replace: true });
 		}
 	},
 });

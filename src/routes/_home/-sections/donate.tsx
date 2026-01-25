@@ -1,7 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import {
-	GithubLogoIcon,
 	HeartIcon,
 	type IconProps,
 	RocketIcon,
@@ -157,7 +156,7 @@ export const DonationBanner = () => (
 					viewport={{ once: true }}
 					transition={{ duration: 0.6, delay: 0.1 }}
 				>
-					<Trans>Support Reactive Resume</Trans>
+					<Trans>Support Juvakel Resume Builder</Trans>
 				</motion.h2>
 
 				<motion.p
@@ -168,8 +167,8 @@ export const DonationBanner = () => (
 					transition={{ duration: 0.6, delay: 0.2 }}
 				>
 					<Trans>
-						Reactive Resume is a free and open-source project, built with love and maintained by me and a community of
-						contributors. Your donations help keep the lights on and the code flowing.
+						Juvakel Resume Builder is part of the Juvakel candidate portal. Reach out to our team for support, guidance, or
+						feature requests.
 					</Trans>
 				</motion.p>
 			</motion.div>
@@ -178,20 +177,20 @@ export const DonationBanner = () => (
 			<div className="mx-auto my-12 grid max-w-5xl gap-8 sm:grid-cols-3">
 				<FeatureCard
 					icon={RocketIcon}
-					title={t`Long-term Sustainability`}
-					description={t`Your support ensures the project remains free and accessible for everyone, now and in the future.`}
+					title={t`Get Support`}
+					description={t`Connect with the Juvakel team for help with your resume or account.`}
 					delay={0.3}
 				/>
 				<FeatureCard
 					icon={WrenchIcon}
-					title={t`Ongoing Maintenance`}
-					description={t`Contributions fund bug fixes, security updates, and continuous improvements to keep the app running smoothly.`}
+					title={t`Share Feedback`}
+					description={t`Tell us what works and what could be better so we can keep improving.`}
 					delay={0.4}
 				/>
 				<FeatureCard
 					icon={UsersIcon}
-					title={t`Grow the Team`}
-					description={t`Help me bring more experienced contributors on board, reducing the burden on a single maintainer and accelerating development.`}
+					title={t`Stay Updated`}
+					description={t`Stay informed about new templates, features, and improvements.`}
 					delay={0.5}
 				/>
 			</div>
@@ -205,17 +204,17 @@ export const DonationBanner = () => (
 				transition={{ duration: 0.6, delay: 0.6 }}
 			>
 				<Button asChild size="lg" className="h-11 gap-2 px-6">
-					<a href="https://opencollective.com/reactive-resume" target="_blank" rel="noopener">
+					<a href="https://juvakelteam.co.zw/contact" target="_blank" rel="noopener">
 						<HeartIcon aria-hidden="true" weight="fill" className="text-rose-400 dark:text-rose-600" />
-						Open Collective
+						Contact Support
 						<span className="sr-only"> ({t`opens in new tab`})</span>
 					</a>
 				</Button>
 
 				<Button asChild size="lg" className="h-11 gap-2 px-6">
-					<a href="https://github.com/sponsors/AmruthPillai" target="_blank" rel="noopener">
-						<GithubLogoIcon aria-hidden="true" weight="fill" className="text-zinc-400 dark:text-zinc-600" />
-						GitHub Sponsors
+					<a href="https://juvakelteam.co.zw" target="_blank" rel="noopener">
+						<RocketIcon aria-hidden="true" weight="fill" className="text-zinc-400 dark:text-zinc-600" />
+						Visit Portal
 						<span className="sr-only"> ({t`opens in new tab`})</span>
 					</a>
 				</Button>
@@ -230,9 +229,7 @@ export const DonationBanner = () => (
 				transition={{ duration: 0.6, delay: 0.8 }}
 			>
 				<Trans>
-					Every contribution, big or small, makes a huge difference to the project.
-					<br />
-					Thank you for your support!
+					Thank you for choosing Juvakel Resume Builder.
 				</Trans>
 			</motion.p>
 		</div>

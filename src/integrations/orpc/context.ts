@@ -1,37 +1,28 @@
 import { ORPCError, os } from "@orpc/server";
-import type { User } from "better-auth";
-import { eq } from "drizzle-orm";
 import { env } from "@/utils/env";
 import type { Locale } from "@/utils/locale";
-import { auth } from "../auth/config";
-import { db } from "../drizzle/client";
-import { user } from "../drizzle/schema";
+import type { AuthSession } from "@/integrations/auth/types";
 
 interface ORPCContext {
 	locale: Locale;
 	reqHeaders?: Headers;
 }
 
-async function getUserFromHeaders(headers: Headers): Promise<User | null> {
+async function getUserFromHeaders(headers: Headers): Promise<AuthSession | null> {
 	try {
-		const result = await auth.api.getSession({ headers });
-		if (!result || !result.user) return null;
+		const baseUrl = env.API_BASE_URL ?? process.env.VITE_API_BASE_URL ?? "http://localhost:4000";
+		const authHeader = headers.get("authorization");
+		if (!authHeader) return null;
 
-		return result.user;
-	} catch {
-		return null;
-	}
-}
+		const response = await fetch(`${baseUrl}/api/auth/profile`, {
+			headers: {
+				authorization: authHeader,
+			},
+		});
 
-async function getUserFromApiKey(apiKey: string): Promise<User | null> {
-	try {
-		const result = await auth.api.verifyApiKey({ body: { key: apiKey } });
-		if (!result.key || !result.valid) return null;
-
-		const [userResult] = await db.select().from(user).where(eq(user.id, result.key.userId)).limit(1);
-		if (!userResult) return null;
-
-		return userResult;
+		if (!response.ok) return null;
+		const data = (await response.json()) as { data?: AuthSession };
+		return data.data ?? null;
 	} catch {
 		return null;
 	}
@@ -41,9 +32,7 @@ const base = os.$context<ORPCContext>();
 
 export const publicProcedure = base.use(async ({ context, next }) => {
 	const headers = context.reqHeaders ?? new Headers();
-	const apiKey = headers.get("x-api-key");
-
-	const user = apiKey ? await getUserFromApiKey(apiKey) : await getUserFromHeaders(headers);
+	const user = await getUserFromHeaders(headers);
 
 	return next({
 		context: {

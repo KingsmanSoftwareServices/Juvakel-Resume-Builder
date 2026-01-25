@@ -8,27 +8,26 @@ export function InformationSectionBuilder() {
 		<SectionBase type="information" className="space-y-4">
 			<div className="space-y-2 rounded-md border bg-sky-600 p-5 text-white dark:bg-sky-700">
 				<h4 className="font-medium tracking-tight">
-					<Trans>Support the app by doing what you can!</Trans>
+					<Trans>Need help or have feedback?</Trans>
 				</h4>
 
 				<div className="space-y-2 text-xs leading-normal">
 					<Trans>
 						<p>
-							Thank you for using Reactive Resume! This app is a labor of love, created mostly in my spare time, with
-							wonderful support from open-source contributors around the world.
+							Thanks for using Juvakel Resume Builder. We're committed to helping you build standout resumes quickly and
+							consistently.
 						</p>
 						<p>
-							If Reactive Resume has been helpful to you, and you'd like to help keep it free and open for everyone,
-							please consider making a donation. Every little bit is appreciated!
+							Reach out any time for support, feedback, or feature requests.
 						</p>
 					</Trans>
 				</div>
 
 				<Button asChild size="sm" variant="default" className="mt-2 whitespace-normal px-4! text-xs">
-					<a href="http://opencollective.com/reactive-resume" target="_blank" rel="noopener">
+					<a href="https://juvakelteam.co.zw/contact" target="_blank" rel="noopener">
 						<HandHeartIcon />
 						<span className="truncate">
-							<Trans>Donate to Reactive Resume</Trans>
+							<Trans>Contact Support</Trans>
 						</span>
 					</a>
 				</Button>
@@ -36,32 +35,32 @@ export function InformationSectionBuilder() {
 
 			<div className="flex flex-wrap gap-0.5">
 				<Button asChild size="sm" variant="link" className="text-xs">
-					<a href="https://docs.rxresu.me" target="_blank" rel="noopener">
-						<Trans>Documentation</Trans>
+					<a href="https://juvakelteam.co.zw" target="_blank" rel="noopener">
+						<Trans>Juvakel Portal</Trans>
 					</a>
 				</Button>
 
 				<Button asChild size="sm" variant="link" className="text-xs">
-					<a href="https://github.com/amruthpillai/reactive-resume" target="_blank" rel="noopener">
-						<Trans>Source Code</Trans>
+					<a href="https://juvakelteam.co.zw/terms" target="_blank" rel="noopener">
+						<Trans>Terms</Trans>
 					</a>
 				</Button>
 
 				<Button asChild size="sm" variant="link" className="text-xs">
-					<a href="https://github.com/amruthpillai/reactive-resume/issues" target="_blank" rel="noopener">
+					<a href="https://juvakelteam.co.zw/privacy" target="_blank" rel="noopener">
+						<Trans>Privacy</Trans>
+					</a>
+				</Button>
+
+				<Button asChild size="sm" variant="link" className="text-xs">
+					<a href="https://juvakelteam.co.zw/contact" target="_blank" rel="noopener">
 						<Trans>Report a Bug</Trans>
 					</a>
 				</Button>
 
 				<Button asChild size="sm" variant="link" className="text-xs">
-					<a href="https://crowdin.com/project/reactive-resume" target="_blank" rel="noopener">
-						<Trans>Translations</Trans>
-					</a>
-				</Button>
-
-				<Button asChild size="sm" variant="link" className="text-xs">
-					<a href="https://opencollective.com/reactive-resume" target="_blank" rel="noopener">
-						<Trans>Sponsors</Trans>
+					<a href="https://juvakelteam.co.zw/contact" target="_blank" rel="noopener">
+						<Trans>Contact</Trans>
 					</a>
 				</Button>
 			</div>

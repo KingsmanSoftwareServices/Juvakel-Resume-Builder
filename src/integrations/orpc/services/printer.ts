@@ -1,7 +1,5 @@
 import { ORPCError } from "@orpc/server";
-import type { InferSelectModel } from "drizzle-orm";
 import puppeteer, { type Browser, type ConnectOptions } from "puppeteer-core";
-import type { schema } from "@/integrations/drizzle";
 import { printMarginTemplates } from "@/schema/templates";
 import { env } from "@/utils/env";
 import { generatePrinterToken } from "@/utils/printer-token";
@@ -70,9 +68,7 @@ export const printerService = {
 	 * 6. Generate the PDF with proper dimensions and margins
 	 * 7. Upload to storage and return the URL
 	 */
-	printResumeAsPDF: async (
-		input: Pick<InferSelectModel<typeof schema.resume>, "userId" | "id" | "data">,
-	): Promise<string> => {
+	printResumeAsPDF: async (input: { userId: string; id: string; data: any }): Promise<string> => {
 		const { id, userId, data } = input;
 
 		// Step 1: Delete any existing PDF for this resume to ensure fresh generation
@@ -196,9 +192,7 @@ export const printerService = {
 		}
 	},
 
-	getResumeScreenshot: async (
-		input: Pick<InferSelectModel<typeof schema.resume>, "userId" | "id" | "data">,
-	): Promise<string> => {
+	getResumeScreenshot: async (input: { userId: string; id: string; data: any }): Promise<string> => {
 		const { id, userId, data } = input;
 
 		const storageService = getStorageService();

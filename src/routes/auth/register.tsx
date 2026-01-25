@@ -13,30 +13,32 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/integrations/auth/client";
-import { SocialAuth } from "./-components/social-auth";
+import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 export const Route = createFileRoute("/auth/register")({
 	component: RouteComponent,
 	beforeLoad: async ({ context }) => {
 		if (context.session) throw redirect({ to: "/dashboard", replace: true });
-		if (context.flags.disableSignups) throw redirect({ to: "/auth/login", replace: true });
-		return { session: null };
+		if (context.flags.disableSignups) {
+			if (typeof window !== "undefined") {
+				window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+			}
+			throw redirect({ to: "/", replace: true });
+		}
+		if (typeof window !== "undefined") {
+			window.location.assign(getCandidateAuthUrl(window.location.href, "register"));
+		}
+		throw redirect({ to: "/", replace: true });
 	},
 });
 
 const formSchema = z.object({
-	name: z.string().min(3).max(64),
-	username: z
-		.string()
-		.min(3)
-		.max(64)
-		.trim()
-		.toLowerCase()
-		.regex(/^[a-z0-9._-]+$/, {
-			message: "Username can only contain lowercase letters, numbers, dots, hyphens and underscores.",
-		}),
 	email: z.email().toLowerCase(),
-	password: z.string().min(6).max(64),
+	password: z
+		.string()
+		.min(8)
+		.max(64)
+		.regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -49,8 +51,6 @@ function RouteComponent() {
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: "",
-			username: "",
 			email: "",
 			password: "",
 		},
@@ -60,12 +60,8 @@ function RouteComponent() {
 		const toastId = toast.loading(t`Signing up...`);
 
 		const { error } = await authClient.signUp.email({
-			name: data.name,
 			email: data.email,
 			password: data.password,
-			username: data.username,
-			displayUsername: data.username,
-			callbackURL: "/dashboard",
 		});
 
 		if (error) {
@@ -103,45 +99,6 @@ function RouteComponent() {
 					<form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
 						<FormField
 							control={form.control}
-							name="name"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>
-										<Trans>Name</Trans>
-									</FormLabel>
-									<FormControl>
-										<Input min={3} max={64} autoComplete="name" placeholder="John Doe" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-
-						<FormField
-							control={form.control}
-							name="username"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>
-										<Trans>Username</Trans>
-									</FormLabel>
-									<FormControl>
-										<Input
-											min={3}
-											max={64}
-											autoComplete="username"
-											placeholder="john.doe"
-											className="lowercase"
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-
-						<FormField
-							control={form.control}
 							name="email"
 							render={({ field }) => (
 								<FormItem>
@@ -173,7 +130,7 @@ function RouteComponent() {
 									<div className="flex items-center gap-x-1.5">
 										<FormControl>
 											<Input
-												min={6}
+												min={8}
 												max={64}
 												type={showPassword ? "text" : "password"}
 												autoComplete="new-password"
@@ -197,7 +154,6 @@ function RouteComponent() {
 				</Form>
 			)}
 
-			<SocialAuth />
 		</>
 	);
 }

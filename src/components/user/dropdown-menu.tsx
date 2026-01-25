@@ -47,16 +47,13 @@ export function UserDropdownMenu({ children }: Props) {
 	function handleLogout() {
 		const toastId = toast.loading(t`Signing out...`);
 
-		authClient.signOut({
-			fetchOptions: {
-				onSuccess: () => {
-					toast.dismiss(toastId);
-					router.invalidate();
-				},
-				onError: ({ error }) => {
-					toast.error(error.message, { id: toastId });
-				},
-			},
+		authClient.signOut().then(({ error }) => {
+			if (error) {
+				toast.error(error.message, { id: toastId });
+				return;
+			}
+			toast.dismiss(toastId);
+			router.invalidate();
 		});
 	}
 

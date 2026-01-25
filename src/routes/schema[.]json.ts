@@ -8,10 +8,10 @@ function handler({ request }: { request: Request }) {
 
 	const resumeDataJSONSchema = z.toJSONSchema(
 		resumeDataSchema.extend({
-			version: z.literal("5.0.0").describe("The version of the Reactive Resume JSON Schema"),
+			version: z.literal("5.0.0").describe("The version of the Juvakel Resume Builder JSON Schema"),
 			$schema: z
 				.literal(`${url.origin}/schema.json`)
-				.describe("The URL of the Reactive Resume JSON Schema, used for validation and documentation purposes."),
+				.describe("The URL of the Juvakel Resume Builder JSON Schema, used for validation and documentation purposes."),
 		}),
 	);
 

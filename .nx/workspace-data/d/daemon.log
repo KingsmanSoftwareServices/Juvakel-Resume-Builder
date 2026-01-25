@@ -1,0 +1,185 @@
+node:internal/modules/cjs/loader:1424
+  throw err;
+  ^
+
+Error: Cannot find module 'chalk'
+Require stack:
+- C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\nx\src\utils\output.js
+- C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\nx\src\daemon\server\start.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.require (node:internal/modules/cjs/loader:1504:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\nx\src\utils\output.js:4:15)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\HomePC\\Juvakel\\Juvakel-Resume-Builder\\node_modules\\nx\\src\\utils\\output.js',
+    'C:\\Users\\HomePC\\Juvakel\\Juvakel-Resume-Builder\\node_modules\\nx\\src\\daemon\\server\\start.js'
+  ]
+}
+
+Node.js v24.12.0
+node:internal/modules/cjs/loader:1247
+  throw err;
+  ^
+
+Error: Cannot find module 'chalk'
+Require stack:
+- C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\nx\src\utils\output.js
+- C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\nx\src\daemon\server\start.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1244:15)
+    at Function._load (node:internal/modules/cjs/loader:1070:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1335:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\nx\src\utils\output.js:4:15)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\HomePC\\Juvakel\\Juvakel-Resume-Builder\\node_modules\\nx\\src\\utils\\output.js',
+    'C:\\Users\\HomePC\\Juvakel\\Juvakel-Resume-Builder\\node_modules\\nx\\src\\daemon\\server\\start.js'
+  ]
+}
+
+Node.js v22.13.1
+[NX Daemon Server] - 2026-01-03T18:34:26.211Z - Started listening on: \\.\pipe\nx\C:\Users\HomePC\AppData\Local\Temp\5e8e5f4679b777e95b02\d.sock
+[NX Daemon Server] - 2026-01-03T18:34:26.219Z - [WATCHER]: Subscribed to changes within: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (native)
+[NX Daemon Server] - 2026-01-03T18:34:26.222Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T18:34:26.225Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-03T18:34:26.226Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T18:34:26.229Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2026-01-03T18:34:26.231Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2026-01-03T18:34:26.231Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2026-01-03T18:34:26.232Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-03T18:34:26.232Z - [WATCHER]: Stopping the watcher for C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (sources)
+[NX Daemon Server] - 2026-01-03T18:34:26.233Z - [WATCHER]: Stopping the watcher for C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (outputs)
+[NX Daemon Server] - 2026-01-03T18:34:51.318Z - Started listening on: \\.\pipe\nx\C:\Users\HomePC\AppData\Local\Temp\5e8e5f4679b777e95b02\d.sock
+[NX Daemon Server] - 2026-01-03T18:34:51.323Z - [WATCHER]: Subscribed to changes within: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (native)
+[NX Daemon Server] - 2026-01-03T18:34:51.327Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T18:34:51.329Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-03T18:34:51.330Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T18:34:51.333Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2026-01-03T18:34:51.678Z - Time taken for 'Load Nx Plugin: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\.pnpm\nx@19.8.14_@swc-node+regist_98b04bf3e91a8a4709a946709d348efb\node_modules\nx\src\plugins\package-json' 328.09369999999996ms
+[NX Daemon Server] - 2026-01-03T18:34:51.690Z - Time taken for 'Load Nx Plugin: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\.pnpm\nx@19.8.14_@swc-node+regist_98b04bf3e91a8a4709a946709d348efb\node_modules\nx\src\plugins\js' 354.841ms
+[NX Daemon Server] - 2026-01-03T18:34:51.702Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2026-01-03T18:34:51.703Z - [REQUEST]: 
+[NX Daemon Server] - 2026-01-03T18:34:51.703Z - [REQUEST]: 
+[NX Daemon Server] - 2026-01-03T18:34:51.714Z - Time taken for 'loadNxPlugins' 356.37640000000005ms
+[NX Daemon Server] - 2026-01-03T18:34:52.525Z - Time taken for 'build-project-configs' 787.1878999999999ms
+[NX Daemon Server] - 2026-01-03T18:34:53.304Z - [SYNC]: collect registered sync generators
+[NX Daemon Server] - 2026-01-03T18:34:53.306Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2026-01-03T18:34:53.308Z - Time taken for 'total for creating and serializing project graph' 1972.3767999999998ms
+[NX Daemon Server] - 2026-01-03T18:34:53.311Z - Done responding to the client project-graph
+[NX Daemon Server] - 2026-01-03T18:34:53.311Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1973. Response time: 5.
+[NX Daemon Server] - 2026-01-03T18:34:53.618Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2026-01-03T18:34:53.619Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2026-01-03T18:34:53.619Z - Handled HASH_TASKS. Handling time: 47. Response time: 1.
+[NX Daemon Server] - 2026-01-03T18:34:54.197Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-03T18:34:54.198Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-03T18:34:54.198Z - Handled GET_ESTIMATED_TASK_TIMINGS. Handling time: 17. Response time: 1.
+[NX Daemon Server] - 2026-01-03T18:35:31.105Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-03T20:03:47.540Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX Daemon Server] - 2026-01-03T20:03:47.545Z - Done responding to the client recordOutputsHash
+[NX Daemon Server] - 2026-01-03T20:03:47.546Z - Handled RECORD_OUTPUTS_HASH. Handling time: 6. Response time: 7.
+[NX Daemon Server] - 2026-01-03T20:03:47.571Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX Daemon Server] - 2026-01-03T20:03:47.575Z - Done responding to the client recordOutputsHash
+[NX Daemon Server] - 2026-01-03T20:03:47.575Z - Handled RECORD_OUTPUTS_HASH. Handling time: 0. Response time: 4.
+[NX Daemon Server] - 2026-01-03T20:03:47.580Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX Daemon Server] - 2026-01-03T20:03:47.581Z - Done responding to the client recordOutputsHash
+[NX Daemon Server] - 2026-01-03T20:03:47.581Z - Handled RECORD_OUTPUTS_HASH. Handling time: 1. Response time: 1.
+[NX Daemon Server] - 2026-01-03T20:03:47.610Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-03T20:04:04.907Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T20:04:04.908Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-03T20:04:04.910Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T20:04:04.915Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2026-01-03T20:04:04.917Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-03T20:04:04.924Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2026-01-03T20:04:04.929Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2026-01-03T20:04:04.937Z - Time taken for 'total for creating and serializing project graph' 4.8713999995961785ms
+[NX Daemon Server] - 2026-01-03T20:04:04.939Z - Done responding to the client project-graph
+[NX Daemon Server] - 2026-01-03T20:04:04.940Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 6. Response time: 11.
+[NX Daemon Server] - 2026-01-03T20:04:04.970Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2026-01-03T20:04:04.972Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2026-01-03T20:04:04.974Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 9. Response time: 4.
+[NX Daemon Server] - 2026-01-03T20:04:04.982Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-03T23:04:03.850Z - [WATCHER]: Stopping the watcher for C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (sources)
+[NX Daemon Server] - 2026-01-03T23:04:03.855Z - [WATCHER]: Stopping the watcher for C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (outputs)
+[NX Daemon Server] - 2026-01-04T04:56:34.185Z - Started listening on: \\.\pipe\nx\C:\Users\HomePC\AppData\Local\Temp\5e8e5f4679b777e95b02\d.sock
+[NX Daemon Server] - 2026-01-04T04:56:34.193Z - [WATCHER]: Subscribed to changes within: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (native)
+[NX Daemon Server] - 2026-01-04T04:56:34.196Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-04T04:56:34.198Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2026-01-04T04:56:34.201Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-04T04:56:34.205Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2026-01-04T04:56:34.647Z - Time taken for 'Load Nx Plugin: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\.pnpm\nx@19.8.14_@swc-node+regist_98b04bf3e91a8a4709a946709d348efb\node_modules\nx\src\plugins\project-json\build-nodes\project-json' 407.5283999999999ms
+[NX Daemon Server] - 2026-01-04T04:56:34.655Z - Time taken for 'Load Nx Plugin: C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder\node_modules\.pnpm\nx@19.8.14_@swc-node+regist_98b04bf3e91a8a4709a946709d348efb\node_modules\nx\src\plugins\package-json' 430.56450000000007ms
+[NX Daemon Server] - 2026-01-04T04:56:34.692Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2026-01-04T04:56:34.693Z - [REQUEST]: 
+[NX Daemon Server] - 2026-01-04T04:56:34.693Z - [REQUEST]: 
+[NX Daemon Server] - 2026-01-04T04:56:34.704Z - Time taken for 'loadNxPlugins' 483.85159999999996ms
+[NX Daemon Server] - 2026-01-04T04:56:35.323Z - Time taken for 'build-project-configs' 592.2289999999999ms
+[NX Daemon Server] - 2026-01-04T04:56:35.550Z - [SYNC]: collect registered sync generators
+[NX Daemon Server] - 2026-01-04T04:56:35.553Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2026-01-04T04:56:35.555Z - Time taken for 'total for creating and serializing project graph' 1348.1398ms
+[NX Daemon Server] - 2026-01-04T04:56:35.558Z - Done responding to the client project-graph
+[NX Daemon Server] - 2026-01-04T04:56:35.558Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1348. Response time: 6.
+[NX Daemon Server] - 2026-01-04T04:56:35.758Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2026-01-04T04:56:35.761Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2026-01-04T04:56:35.762Z - Handled HASH_TASKS. Handling time: 50. Response time: 4.
+[NX Daemon Server] - 2026-01-04T04:56:37.394Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-04T04:56:37.396Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-04T04:56:37.396Z - Handled GET_ESTIMATED_TASK_TIMINGS. Handling time: 22. Response time: 2.
+[NX Daemon Server] - 2026-01-04T04:56:40.444Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T04:56:57.956Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T04:58:05.610Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-04T04:58:49.430Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-04T04:58:49.431Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-04T04:58:49.431Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-04T04:58:49.437Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2026-01-04T04:58:49.438Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2026-01-04T04:58:49.440Z - Time taken for 'total for creating and serializing project graph' 1.0732000000134576ms
+[NX Daemon Server] - 2026-01-04T04:58:49.445Z - Done responding to the client project-graph
+[NX Daemon Server] - 2026-01-04T04:58:49.445Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 7.
+[NX Daemon Server] - 2026-01-04T04:58:49.584Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2026-01-04T04:58:49.586Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2026-01-04T04:58:49.586Z - Handled HASH_TASKS. Handling time: 36. Response time: 2.
+[NX Daemon Server] - 2026-01-04T04:58:50.266Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-04T04:58:50.267Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-04T04:58:50.267Z - Handled GET_ESTIMATED_TASK_TIMINGS. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2026-01-04T04:58:52.572Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T04:59:08.466Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T05:11:10.663Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T05:11:14.344Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T05:12:05.809Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-04T05:12:11.347Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-04T05:12:11.349Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-04T05:12:11.349Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2026-01-04T05:12:11.355Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2026-01-04T05:12:11.357Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2026-01-04T05:12:11.359Z - Time taken for 'total for creating and serializing project graph' 0.9414999999571592ms
+[NX Daemon Server] - 2026-01-04T05:12:11.364Z - Done responding to the client project-graph
+[NX Daemon Server] - 2026-01-04T05:12:11.364Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 8.
+[NX Daemon Server] - 2026-01-04T05:12:11.496Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2026-01-04T05:12:11.498Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2026-01-04T05:12:11.498Z - Handled HASH_TASKS. Handling time: 36. Response time: 2.
+[NX Daemon Server] - 2026-01-04T05:12:12.215Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-04T05:12:12.216Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2026-01-04T05:12:12.216Z - Handled GET_ESTIMATED_TASK_TIMINGS. Handling time: 1. Response time: 1.
+[NX Daemon Server] - 2026-01-04T05:12:14.524Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T05:12:30.004Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2026-01-04T08:03:24.508Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX Daemon Server] - 2026-01-04T08:03:24.509Z - Done responding to the client recordOutputsHash
+[NX Daemon Server] - 2026-01-04T08:03:24.509Z - Handled RECORD_OUTPUTS_HASH. Handling time: 2. Response time: 1.
+[NX Daemon Server] - 2026-01-04T08:03:24.519Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX Daemon Server] - 2026-01-04T08:03:24.520Z - Done responding to the client recordOutputsHash
+[NX Daemon Server] - 2026-01-04T08:03:24.520Z - Handled RECORD_OUTPUTS_HASH. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2026-01-04T08:03:24.566Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2026-01-04T11:03:24.536Z - [WATCHER]: Stopping the watcher for C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (sources)
+[NX Daemon Server] - 2026-01-04T11:03:24.541Z - [WATCHER]: Stopping the watcher for C:\Users\HomePC\Juvakel\Juvakel-Resume-Builder (outputs)

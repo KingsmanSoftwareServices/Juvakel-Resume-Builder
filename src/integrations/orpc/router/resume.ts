@@ -16,7 +16,7 @@ const tagsRouter = {
 		})
 		.output(z.array(z.string()))
 		.handler(async ({ context }) => {
-			return await resumeService.tags.list({ userId: context.user.id });
+			return await resumeService.tags.list({ reqHeaders: context.reqHeaders });
 		}),
 };
 
@@ -24,7 +24,7 @@ const statisticsRouter = {
 	getById: protectedProcedure
 		.route({
 			method: "GET",
-			path: "/resume/statistics/{id}",
+			path: "/resume/statistics/getById",
 			tags: ["Resume"],
 			summary: "Get resume statistics",
 			description: "Get the statistics for a resume, such as number of views and downloads.",
@@ -40,7 +40,7 @@ const statisticsRouter = {
 			}),
 		)
 		.handler(async ({ context, input }) => {
-			return await resumeService.statistics.getById({ id: input.id, userId: context.user.id });
+			return await resumeService.statistics.getById({ id: input.id, reqHeaders: context.reqHeaders });
 		}),
 
 	increment: publicProcedure
@@ -88,16 +88,16 @@ export const resumeRouter = {
 		)
 		.handler(async ({ input, context }) => {
 			return await resumeService.list({
-				userId: context.user.id,
 				tags: input.tags,
 				sort: input.sort,
+				reqHeaders: context.reqHeaders,
 			});
 		}),
 
 	getById: protectedProcedure
 		.route({
 			method: "GET",
-			path: "/resume/{id}",
+			path: "/resume/getById",
 			tags: ["Resume"],
 			summary: "Get resume by ID",
 			description: "Get a resume, along with its data, by its ID.",
@@ -116,25 +116,25 @@ export const resumeRouter = {
 			}),
 		)
 		.handler(async ({ context, input }) => {
-			return await resumeService.getById({ id: input.id, userId: context.user.id });
+			return await resumeService.getById({ id: input.id, reqHeaders: context.reqHeaders });
 		}),
 
 	getByIdForPrinter: serverOnlyProcedure
 		.route({ tags: ["Internal"], summary: "Get resume by ID for printer" })
 		.input(z.object({ id: z.string() }))
-		.handler(async ({ input }) => {
-			return await resumeService.getByIdForPrinter({ id: input.id });
+		.handler(async ({ input, context }) => {
+			return await resumeService.getByIdForPrinter({ id: input.id, reqHeaders: context.reqHeaders });
 		}),
 
-	getBySlug: publicProcedure
+	getPublicById: publicProcedure
 		.route({
 			method: "GET",
-			path: "/resume/{username}/{slug}",
+			path: "/resume/getPublicById",
 			tags: ["Resume"],
-			summary: "Get resume by username and slug",
-			description: "Get a resume, along with its data, by its username and slug.",
+			summary: "Get public resume by ID",
+			description: "Get a public resume by its ID.",
 		})
-		.input(z.object({ username: z.string(), slug: z.string() }))
+		.input(z.object({ id: z.string() }))
 		.output(
 			z.object({
 				id: z.string(),
@@ -146,8 +146,8 @@ export const resumeRouter = {
 				isLocked: z.boolean(),
 			}),
 		)
-		.handler(async ({ input, context }) => {
-			return await resumeService.getBySlug({ ...input, currentUserId: context.user?.id });
+		.handler(async ({ input }) => {
+			return await resumeService.getPublicById({ id: input.id });
 		}),
 
 	create: protectedProcedure
@@ -178,8 +178,7 @@ export const resumeRouter = {
 				name: input.name,
 				slug: input.slug,
 				tags: input.tags,
-				locale: context.locale,
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 				data: input.withSampleData ? sampleResumeData : undefined,
 			});
 		}),
@@ -209,15 +208,14 @@ export const resumeRouter = {
 				slug,
 				tags: [],
 				data: input.data,
-				locale: context.locale,
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 			});
 		}),
 
 	update: protectedProcedure
 		.route({
 			method: "PUT",
-			path: "/resume/{id}",
+			path: "/resume/update",
 			tags: ["Resume"],
 			summary: "Update a resume",
 			description: "Update a resume, along with its data, by its ID.",
@@ -242,7 +240,7 @@ export const resumeRouter = {
 		.handler(async ({ context, input }) => {
 			return await resumeService.update({
 				id: input.id,
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 				name: input.name,
 				slug: input.slug,
 				tags: input.tags,
@@ -254,7 +252,7 @@ export const resumeRouter = {
 	setLocked: protectedProcedure
 		.route({
 			method: "POST",
-			path: "/resume/{id}/set-locked",
+			path: "/resume/setLocked",
 			tags: ["Resume"],
 			summary: "Set resume locked status",
 			description: "Toggle the locked status of a resume, by its ID.",
@@ -264,7 +262,7 @@ export const resumeRouter = {
 		.handler(async ({ context, input }) => {
 			return await resumeService.setLocked({
 				id: input.id,
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 				isLocked: input.isLocked,
 			});
 		}),
@@ -272,7 +270,7 @@ export const resumeRouter = {
 	setPassword: protectedProcedure
 		.route({
 			method: "POST",
-			path: "/resume/{id}/set-password",
+			path: "/resume/setPassword",
 			tags: ["Resume"],
 			summary: "Set password on a resume",
 			description: "Set a password on a resume to protect it from unauthorized access when shared publicly.",
@@ -282,7 +280,7 @@ export const resumeRouter = {
 		.handler(async ({ context, input }) => {
 			return await resumeService.setPassword({
 				id: input.id,
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 				password: input.password,
 			});
 		}),
@@ -290,7 +288,7 @@ export const resumeRouter = {
 	removePassword: protectedProcedure
 		.route({
 			method: "POST",
-			path: "/resume/{id}/remove-password",
+			path: "/resume/removePassword",
 			tags: ["Resume"],
 			summary: "Remove password from a resume",
 			description: "Remove password protection from a resume.",
@@ -300,14 +298,14 @@ export const resumeRouter = {
 		.handler(async ({ context, input }) => {
 			return await resumeService.removePassword({
 				id: input.id,
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 			});
 		}),
 
 	duplicate: protectedProcedure
 		.route({
 			method: "POST",
-			path: "/resume/{id}/duplicate",
+			path: "/resume/duplicate",
 			tags: ["Resume"],
 			summary: "Duplicate a resume",
 			description: "Duplicate a resume, by its ID.",
@@ -322,14 +320,13 @@ export const resumeRouter = {
 		)
 		.output(z.string().describe("The ID of the duplicated resume."))
 		.handler(async ({ context, input }) => {
-			const original = await resumeService.getById({ id: input.id, userId: context.user.id });
+			const original = await resumeService.getById({ id: input.id, reqHeaders: context.reqHeaders });
 
 			return await resumeService.create({
-				userId: context.user.id,
+				reqHeaders: context.reqHeaders,
 				name: input.name ?? original.name,
 				slug: input.slug ?? original.slug,
 				tags: input.tags ?? original.tags,
-				locale: context.locale,
 				data: original.data,
 			});
 		}),
@@ -337,7 +334,7 @@ export const resumeRouter = {
 	delete: protectedProcedure
 		.route({
 			method: "DELETE",
-			path: "/resume/{id}",
+			path: "/resume/delete",
 			tags: ["Resume"],
 			summary: "Delete a resume",
 			description: "Delete a resume, by its ID.",
@@ -345,6 +342,6 @@ export const resumeRouter = {
 		.input(z.object({ id: z.string() }))
 		.output(z.void())
 		.handler(async ({ context, input }) => {
-			return await resumeService.delete({ id: input.id, userId: context.user.id });
+			return await resumeService.delete({ id: input.id, reqHeaders: context.reqHeaders });
 		}),
 };

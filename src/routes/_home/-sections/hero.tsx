@@ -7,6 +7,7 @@ import { CometCard } from "@/components/animation/comet-card";
 import { Spotlight } from "@/components/animation/spotlight";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { withBasePath } from "@/utils/paths";
 
 export function Hero() {
 	return (
@@ -29,8 +30,8 @@ export function Hero() {
 						playsInline
 						// @ts-expect-error - typescript doesn't know about fetchPriority for video elements
 						fetchPriority="high"
-						src="/videos/timelapse.webm"
-						aria-label={t`Timelapse demonstration of building a resume with Reactive Resume`}
+						src={withBasePath("/videos/timelapse.webm")}
+						aria-label={t`Timelapse demonstration of building a resume with Juvakel Resume Builder`}
 						className="pointer-events-none aspect-video size-full rounded-lg border object-cover shadow-2xl"
 					/>
 
@@ -49,7 +50,7 @@ export function Hero() {
 					transition={{ duration: 0.6, delay: 0.8 }}
 					target="_blank"
 					rel="noopener"
-					href="https://docs.rxresu.me/getting-started"
+					href="https://juvakelteam.co.zw"
 				>
 					<Badge variant="secondary" className="h-auto gap-1.5 px-3 py-0.5">
 						<SparkleIcon aria-hidden="true" className="size-3.5" weight="fill" />
@@ -66,7 +67,7 @@ export function Hero() {
 					<Trans>
 						<p className="font-medium text-muted-foreground tracking-tight md:text-lg">Finally,</p>
 						<h1 className="mt-1 font-bold text-4xl tracking-tight md:text-5xl lg:text-6xl">
-							A free and open-source resume builder
+							A modern resume builder for Juvakel candidates
 						</h1>
 					</Trans>
 				</motion.div>
@@ -79,8 +80,7 @@ export function Hero() {
 					transition={{ duration: 0.6, delay: 1.2 }}
 				>
 					<Trans>
-						Reactive Resume is a free and open-source resume builder that simplifies the process of creating, updating,
-						and sharing your resume.
+						Juvakel Resume Builder helps you create, update, and share professional resumes in minutes.
 					</Trans>
 				</motion.p>
 
@@ -104,7 +104,7 @@ export function Hero() {
 					</Button>
 
 					<Button asChild size="lg" variant="ghost" className="gap-2 px-4">
-						<a href="https://docs.rxresu.me" target="_blank" rel="noopener">
+						<a href="https://juvakelteam.co.zw" target="_blank" rel="noopener">
 							<BookIcon aria-hidden="true" className="size-4" />
 							<Trans>Learn More</Trans>
 							<span className="sr-only">

@@ -13,6 +13,7 @@ import { useResumeStore } from "@/components/resume/store/resume";
 import { ResizableGroup, ResizablePanel, ResizableSeparator } from "@/components/ui/resizable";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { orpc } from "@/integrations/orpc/client";
+import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 import { BuilderHeader } from "./-components/header";
 import { BuilderSidebarLeft } from "./-sidebar/left";
 import { BuilderSidebarRight } from "./-sidebar/right";
@@ -21,7 +22,11 @@ import { useBuilderSidebar, useBuilderSidebarStore } from "./-store/sidebar";
 export const Route = createFileRoute("/builder/$resumeId")({
 	component: RouteComponent,
 	beforeLoad: async ({ context }) => {
-		if (!context.session) throw redirect({ to: "/auth/login", replace: true });
+		if (typeof window !== "undefined" && !context.session) {
+			localStorage.setItem("intendedUrl", window.location.href);
+			window.location.assign(getCandidateAuthUrl(window.location.href));
+			throw redirect({ to: "/auth", replace: true });
+		}
 		return { session: context.session };
 	},
 	loader: async ({ params, context }) => {
@@ -33,7 +38,7 @@ export const Route = createFileRoute("/builder/$resumeId")({
 		return { layout, name: resume.name };
 	},
 	head: ({ loaderData }) => ({
-		meta: loaderData ? [{ title: `${loaderData.name} - Reactive Resume` }] : undefined,
+		meta: loaderData ? [{ title: `${loaderData.name} - Juvakel Resume Builder` }] : undefined,
 	}),
 });
 

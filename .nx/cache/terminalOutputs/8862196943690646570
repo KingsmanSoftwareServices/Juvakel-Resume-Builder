@@ -1,0 +1,5 @@
+Loading proxy configuration from: /Users/HomePC/Juvakel/Juvakel-Resume-Builder/apps/client/proxy.conf.json
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.100.81:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.32.1:[1m5173[22m/[39m
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`

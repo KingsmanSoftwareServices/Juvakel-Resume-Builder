@@ -1,0 +1,94 @@
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 656 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/auth/strategy/github.strategy.ts:[32m[1m4:10[22m[39m[1m[39m[22m
+[90mTS2305: [39mModule '"@prisma/client"' has no exported member 'User'.
+  [0m [90m 2 |[39m [36mimport[39m { [33mPassportStrategy[39m } [36mfrom[39m [32m"@nestjs/passport"[39m[33m;[39m
+   [90m 3 |[39m [36mimport[39m { createId } [36mfrom[39m [32m"@paralleldrive/cuid2"[39m[33m;[39m
+  [31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m"@prisma/client"[39m[33m;[39m
+   [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 5 |[39m [36mimport[39m { [33mErrorMessage[39m[33m,[39m processUsername } [36mfrom[39m [32m"@reactive-resume/utils"[39m[33m;[39m
+   [90m 6 |[39m [36mimport[39m { [33mProfile[39m[33m,[39m [33mStrategy[39m[33m,[39m [33mStrategyOptions[39m } [36mfrom[39m [32m"passport-github2"[39m[33m;[39m
+   [90m 7 |[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/auth/strategy/google.strategy.ts:[32m[1m4:10[22m[39m[1m[39m[22m
+[90mTS2305: [39mModule '"@prisma/client"' has no exported member 'User'.
+  [0m [90m 2 |[39m [36mimport[39m { [33mPassportStrategy[39m } [36mfrom[39m [32m"@nestjs/passport"[39m[33m;[39m
+   [90m 3 |[39m [36mimport[39m { createId } [36mfrom[39m [32m"@paralleldrive/cuid2"[39m[33m;[39m
+  [31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m"@prisma/client"[39m[33m;[39m
+   [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 5 |[39m [36mimport[39m { [33mErrorMessage[39m[33m,[39m processUsername } [36mfrom[39m [32m"@reactive-resume/utils"[39m[33m;[39m
+   [90m 6 |[39m [36mimport[39m { [33mProfile[39m[33m,[39m [33mStrategy[39m[33m,[39m [33mStrategyOptions[39m[33m,[39m [33mVerifyCallback[39m } [36mfrom[39m [32m"passport-google-oauth20"[39m[33m;[39m
+   [90m 7 |[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/auth/strategy/openid.strategy.ts:[32m[1m3:10[22m[39m[1m[39m[22m
+[90mTS2305: [39mModule '"@prisma/client"' has no exported member 'User'.
+  [0m [90m 1 |[39m [36mimport[39m { [33mBadRequestException[39m[33m,[39m [33mInjectable[39m[33m,[39m [33mLogger[39m } [36mfrom[39m [32m"@nestjs/common"[39m[33m;[39m
+   [90m 2 |[39m [36mimport[39m { [33mPassportStrategy[39m } [36mfrom[39m [32m"@nestjs/passport"[39m[33m;[39m
+  [31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m"@prisma/client"[39m[33m;[39m
+   [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 4 |[39m [36mimport[39m { [33mErrorMessage[39m[33m,[39m generateRandomName[33m,[39m processUsername } [36mfrom[39m [32m"@reactive-resume/utils"[39m[33m;[39m
+   [90m 5 |[39m [36mimport[39m { [33mProfile[39m[33m,[39m [33mStrategy[39m[33m,[39m [33mStrategyOptions[39m } [36mfrom[39m [32m"passport-openidconnect"[39m[33m;[39m
+   [90m 6 |[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/resume/resume.controller.ts:[32m[1m15:10[22m[39m[1m[39m[22m
+[90mTS2305: [39mModule '"@prisma/client"' has no exported member 'User'.
+  [0m [90m 13 |[39m } [36mfrom[39m [32m"@nestjs/common"[39m[33m;[39m
+   [90m 14 |[39m [36mimport[39m { [33mApiTags[39m } [36mfrom[39m [32m"@nestjs/swagger"[39m[33m;[39m
+  [31m[1m>[22m[39m[90m 15 |[39m [36mimport[39m { [33mUser[39m [36mas[39m [33mUserEntity[39m } [36mfrom[39m [32m"@prisma/client"[39m[33m;[39m
+   [90m    |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 16 |[39m [36mimport[39m { [33mPrismaClientKnownRequestError[39m } [36mfrom[39m [32m"@prisma/client/runtime/library"[39m[33m;[39m
+   [90m 17 |[39m [36mimport[39m {
+   [90m 18 |[39m   [33mCreateResumeDto[39m[33m,[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/resume/resume.service.ts:[32m[1m116:48[22m[39m[1m[39m[22m
+[90mTS2694: [39mNamespace '"C:/Users/HomePC/Juvakel/Juvakel-Resume-Builder/node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/default".Prisma' has no exported member 'JsonObject'.
+  [0m [90m 114 |[39m           slug[33m:[39m updateResumeDto[33m.[39mslug[33m,[39m
+   [90m 115 |[39m           visibility[33m:[39m updateResumeDto[33m.[39mvisibility[33m,[39m
+  [31m[1m>[22m[39m[90m 116 |[39m           data[33m:[39m updateResumeDto[33m.[39mdata [36mas[39m [33mPrisma[39m[33m.[39m[33mJsonObject[39m[33m,[39m
+   [90m     |[39m                                                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 117 |[39m         }[33m,[39m
+   [90m 118 |[39m         where[33m:[39m { userId_id[33m:[39m { userId[33m,[39m id } }[33m,[39m
+   [90m 119 |[39m       })[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/user/user.service.ts:[32m[1m2:18[22m[39m[1m[39m[22m
+[90mTS2305: [39mModule '"@prisma/client"' has no exported member 'User'.
+  [0m [90m 1 |[39m [36mimport[39m { [33mInjectable[39m[33m,[39m [33mInternalServerErrorException[39m } [36mfrom[39m [32m"@nestjs/common"[39m[33m;[39m
+  [31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { [33mPrisma[39m[33m,[39m [33mUser[39m } [36mfrom[39m [32m"@prisma/client"[39m[33m;[39m
+   [90m   |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 3 |[39m [36mimport[39m { [33mUserWithSecrets[39m } [36mfrom[39m [32m"@reactive-resume/dto"[39m[33m;[39m
+   [90m 4 |[39m [36mimport[39m { [33mErrorMessage[39m } [36mfrom[39m [32m"@reactive-resume/utils"[39m[33m;[39m
+   [90m 5 |[39m [36mimport[39m { [33mPrismaService[39m } [36mfrom[39m [32m"nestjs-prisma"[39m[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/user/user.service.ts:[32m[1m73:23[22m[39m[1m[39m[22m
+[90mTS2694: [39mNamespace '"C:/Users/HomePC/Juvakel/Juvakel-Resume-Builder/node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/default".Prisma' has no exported member 'UserCreateInput'.
+  [0m [90m 71 |[39m   }
+   [90m 72 |[39m
+  [31m[1m>[22m[39m[90m 73 |[39m   create(data[33m:[39m [33mPrisma[39m[33m.[39m[33mUserCreateInput[39m)[33m:[39m [33mPromise[39m[33m<[39m[33mUserWithSecrets[39m[33m>[39m {
+   [90m    |[39m                       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 74 |[39m     [36mreturn[39m [36mthis[39m[33m.[39mprisma[33m.[39muser[33m.[39mcreate({ data[33m,[39m include[33m:[39m { secrets[33m:[39m [36mtrue[39m } })[33m;[39m
+   [90m 75 |[39m   }
+   [90m 76 |[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/user/user.service.ts:[32m[1m77:45[22m[39m[1m[39m[22m
+[90mTS2694: [39mNamespace '"C:/Users/HomePC/Juvakel/Juvakel-Resume-Builder/node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/default".Prisma' has no exported member 'UserUpdateArgs'.
+  [0m [90m 75 |[39m   }
+   [90m 76 |[39m
+  [31m[1m>[22m[39m[90m 77 |[39m   updateByEmail(email[33m:[39m string[33m,[39m data[33m:[39m [33mPrisma[39m[33m.[39m[33mUserUpdateArgs[39m[[32m"data"[39m])[33m:[39m [33mPromise[39m[33m<[39m[33mUser[39m[33m>[39m {
+   [90m    |[39m                                             [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 78 |[39m     [36mreturn[39m [36mthis[39m[33m.[39mprisma[33m.[39muser[33m.[39mupdate({ where[33m:[39m { email }[33m,[39m data })[33m;[39m
+   [90m 79 |[39m   }
+   [90m 80 |[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/user/user.service.ts:[32m[1m83:18[22m[39m[1m[39m[22m
+[90mTS2694: [39mNamespace '"C:/Users/HomePC/Juvakel/Juvakel-Resume-Builder/node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/default".Prisma' has no exported member 'SecretsUpdateArgs'.
+  [0m [90m 81 |[39m   [36masync[39m updateByResetToken(
+   [90m 82 |[39m     resetToken[33m:[39m string[33m,[39m
+  [31m[1m>[22m[39m[90m 83 |[39m     data[33m:[39m [33mPrisma[39m[33m.[39m[33mSecretsUpdateArgs[39m[[32m"data"[39m][33m,[39m
+   [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 84 |[39m   )[33m:[39m [33mPromise[39m[33m<[39m[36mvoid[39m[33m>[39m {
+   [90m 85 |[39m     [36mawait[39m [36mthis[39m[33m.[39mprisma[33m.[39msecrets[33m.[39mupdate({ where[33m:[39m { resetToken }[33m,[39m data })[33m;[39m
+   [90m 86 |[39m   }[0m
+
+webpack compiled with [1m[31m9 errors[39m[22m (02c4bf5af763daa0)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m

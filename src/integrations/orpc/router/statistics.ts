@@ -6,10 +6,10 @@ const userRouter = {
 	getCount: publicProcedure
 		.route({
 			method: "GET",
-			path: "/statistics/user/count",
+			path: "/statistics/user/getCount",
 			tags: ["Statistics"],
 			summary: "Get total number of users",
-			description: "Get the total number of users for the Reactive Resume.",
+			description: "Get the total number of users for the Juvakel Resume Builder.",
 		})
 		.output(z.number())
 		.handler(async (): Promise<number> => {
@@ -21,10 +21,10 @@ const resumeRouter = {
 	getCount: publicProcedure
 		.route({
 			method: "GET",
-			path: "/statistics/resume/count",
+			path: "/statistics/resume/getCount",
 			tags: ["Statistics"],
 			summary: "Get total number of resumes",
-			description: "Get the total number of resumes for the Reactive Resume.",
+			description: "Get the total number of resumes for the Juvakel Resume Builder.",
 		})
 		.output(z.number())
 		.handler(async (): Promise<number> => {
@@ -36,10 +36,10 @@ const githubRouter = {
 	getStarCount: publicProcedure
 		.route({
 			method: "GET",
-			path: "/statistics/github/stars",
+			path: "/statistics/github/getStarCount",
 			tags: ["Statistics"],
 			summary: "Get GitHub Repository stargazers count",
-			description: "Get the stargazers count for the Reactive Resume GitHub repository, at the time of writing.",
+			description: "Get the stargazers count for the Juvakel Resume Builder GitHub repository, at the time of writing.",
 		})
 		.output(z.number())
 		.handler(async (): Promise<number> => {

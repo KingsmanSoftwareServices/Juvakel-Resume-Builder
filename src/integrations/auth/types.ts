@@ -1,8 +1,10 @@
-import z from "zod";
-import type { auth } from "./config";
+export type AuthSession = {
+	userId: string;
+	email: string;
+	role: "admin" | "company" | "candidate";
+	isEmailVerified: boolean;
+	is2FAEnabled: boolean;
+	jti?: string;
+};
 
-export type AuthSession = typeof auth.$Infer.Session;
-
-const authProviderSchema = z.enum(["credential", "google", "github", "custom"]);
-
-export type AuthProvider = z.infer<typeof authProviderSchema>;
+export type AuthProvider = "credential" | "google" | "facebook" | "linkedin";

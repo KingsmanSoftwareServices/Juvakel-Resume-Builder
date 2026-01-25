@@ -12,7 +12,7 @@ export function Prefooter() {
 			</div>
 
 			<div className="relative space-y-8">
-				<TextMaskEffect aria-hidden="true" text="Reactive Resume" className="hidden md:block" />
+				<TextMaskEffect aria-hidden="true" text="Juvakel Resume Builder" className="hidden md:block" />
 
 				<motion.div
 					className="mx-auto max-w-3xl space-y-8 px-6 text-center md:px-8 xl:px-0"
@@ -22,15 +22,13 @@ export function Prefooter() {
 					transition={{ duration: 0.6 }}
 				>
 					<h2 className="font-bold text-2xl tracking-tight md:text-4xl">
-						<Trans>By the community, for the community.</Trans>
+						<Trans>Built for Juvakel candidates.</Trans>
 					</h2>
 
 					<p className="text-muted-foreground leading-relaxed">
 						<Trans>
-							Reactive Resume continues to grow thanks to its vibrant community. This project owes its progress to
-							numerous individuals who've dedicated their time and skills to make it better. We celebrate the coders
-							who've enhanced its features on GitHub, the linguists whose translations on Crowdin have made it
-							accessible to a broader audience, and the people who've donated to support its continued development.
+							Juvakel Resume Builder is part of the Juvakel candidate portal, designed to help you create polished resumes
+							fast. Our team continuously improves the experience based on candidate feedback.
 						</Trans>
 					</p>
 				</motion.div>

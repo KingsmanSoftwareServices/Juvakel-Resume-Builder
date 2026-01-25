@@ -2,15 +2,7 @@ import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
-import {
-	BrainIcon,
-	GearSixIcon,
-	KeyIcon,
-	ReadCvLogoIcon,
-	ShieldCheckIcon,
-	UserCircleIcon,
-	WarningIcon,
-} from "@phosphor-icons/react";
+import { BrainIcon, GearSixIcon, ReadCvLogoIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -50,34 +42,14 @@ const appSidebarItems = [
 
 const settingsSidebarItems = [
 	{
-		icon: <UserCircleIcon />,
-		label: msg`Profile`,
-		href: "/dashboard/settings/profile",
-	},
-	{
 		icon: <GearSixIcon />,
 		label: msg`Preferences`,
 		href: "/dashboard/settings/preferences",
 	},
 	{
-		icon: <ShieldCheckIcon />,
-		label: msg`Authentication`,
-		href: "/dashboard/settings/authentication",
-	},
-	{
-		icon: <KeyIcon />,
-		label: msg`API Keys`,
-		href: "/dashboard/settings/api-keys",
-	},
-	{
 		icon: <BrainIcon />,
 		label: msg`Artificial Intelligence`,
 		href: "/dashboard/settings/ai",
-	},
-	{
-		icon: <WarningIcon />,
-		label: msg`Danger Zone`,
-		href: "/dashboard/settings/danger-zone",
 	},
 ] as const satisfies SidebarItem[];
 
@@ -117,7 +89,7 @@ export function DashboardSidebar() {
 						<SidebarMenuButton asChild className="h-auto justify-center">
 							<Link to="/">
 								<BrandIcon variant="icon" className="size-6" />
-								<h1 className="sr-only">Reactive Resume</h1>
+								<h1 className="sr-only">Juvakel Resume Builder</h1>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>

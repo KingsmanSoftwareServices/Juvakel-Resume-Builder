@@ -16,39 +16,39 @@ import { cn } from "@/utils/style";
 export const Route = createFileRoute("/$username/$slug")({
 	component: RouteComponent,
 	loader: async ({ context, params: { username, slug } }) => {
-		const resume = await context.queryClient.ensureQueryData(
-			orpc.resume.getBySlug.queryOptions({ input: { username, slug } }),
-		);
-
-		return { resume };
-	},
-	head: ({ loaderData }) => ({
-		meta: [{ title: loaderData ? `${loaderData.resume.name} - Reactive Resume` : "Reactive Resume" }],
-	}),
-	onError: (error) => {
-		if (error instanceof ORPCError && error.code === "NEED_PASSWORD") {
-			const data = error.data as { username?: string; slug?: string } | undefined;
-			const username = data?.username;
-			const slug = data?.slug;
-
-			if (username && slug) {
+		if (username !== "r") {
+			throw notFound();
+		}
+		try {
+			const resume = await context.queryClient.ensureQueryData(
+				orpc.resume.getPublicById.queryOptions({ input: { id: slug } }),
+			);
+			return { resume };
+		} catch (error) {
+			if (
+				(error instanceof ORPCError && error.code === "NEED_PASSWORD") ||
+				(error instanceof Error && error.message.includes("Password"))
+			) {
 				throw redirect({
 					to: "/auth/resume-password",
-					search: { redirect: `/${username}/${slug}` },
+					search: { redirect: `/r/${slug}` },
 				});
 			}
+			throw notFound();
 		}
-
-		throw notFound();
 	},
+	head: ({ loaderData }) => ({
+		meta: [{ title: loaderData ? `${loaderData.resume.name} - Juvakel Resume Builder` : "Juvakel Resume Builder" }],
+	}),
 });
 
 function RouteComponent() {
 	const { username, slug } = Route.useParams();
+	if (username !== "r") throw notFound();
 	const isReady = useResumeStore((state) => state.isReady);
 	const initialize = useResumeStore((state) => state.initialize);
 
-	const { data: resume } = useQuery(orpc.resume.getBySlug.queryOptions({ input: { username, slug } }));
+	const { data: resume } = useQuery(orpc.resume.getPublicById.queryOptions({ input: { id: slug } }));
 	const { mutateAsync: printResumeAsPDF, isPending: isPrinting } = useMutation(
 		orpc.printer.printResumeAsPDF.mutationOptions(),
 	);

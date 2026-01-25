@@ -28,10 +28,25 @@ export const getORPCClient = createIsomorphicFn()
 		});
 	})
 	.client((): RouterClient<typeof router> => {
+		const basePathRaw = import.meta.env.VITE_APP_BASE_PATH ?? "/";
+		const basepath =
+			basePathRaw === "/"
+				? "/"
+				: `/${basePathRaw.replace(/^\/|\/$/g, "")}/`;
+		const apiBase = import.meta.env.DEV
+			? new URL("/", window.location.origin)
+			: new URL(basepath, window.location.origin);
+		const rpcUrl = new URL("api/rpc", apiBase).toString();
+
 		const link = new RPCLink({
-			url: `${window.location.origin}/api/rpc`,
+			url: rpcUrl,
 			fetch: (request, init) => {
-				return fetch(request, { ...init, credentials: "include" });
+				const token = localStorage.getItem("accessToken");
+				const headers = new Headers(init?.headers ?? {});
+				if (token) {
+					headers.set("Authorization", `Bearer ${token}`);
+				}
+				return fetch(request, { ...init, credentials: "include", headers });
 			},
 			interceptors: [
 				onError((error) => {

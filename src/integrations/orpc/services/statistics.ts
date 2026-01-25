@@ -1,16 +1,12 @@
 import fs from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { count } from "drizzle-orm";
-import { schema } from "@/integrations/drizzle";
-import { db } from "@/integrations/drizzle/client";
-
 const CACHE_DURATION_MS = 6 * 60 * 60 * 1000; // 6 hours
-const GITHUB_API_URL = "https://api.github.com/repos/amruthpillai/reactive-resume";
+const GITHUB_API_URL = "";
 
 const LAST_KNOWN = {
-	users: 978_528,
-	resumes: 1_336_307,
-	stars: 34_073,
+	users: 0,
+	resumes: 0,
+	stars: 0,
 } as const;
 
 const getCachePath = (key: string) => join(process.cwd(), "data", "statistics", `${key}.txt`);
@@ -60,12 +56,12 @@ const getCachedCount = async (
 	return lastKnown;
 };
 
-const getCountFromDatabase = async (table: typeof schema.user | typeof schema.resume): Promise<number | null> => {
-	const [result] = await db.select({ count: count() }).from(table);
-	return result.count;
+const getCountFromDatabase = async (): Promise<number | null> => {
+	return null;
 };
 
 const getGitHubStars = async (): Promise<number | null> => {
+	if (!GITHUB_API_URL) return null;
 	const response = await fetch(GITHUB_API_URL, { headers: { Accept: "application/vnd.github+json" } });
 	if (!response.ok) return null;
 
@@ -77,12 +73,12 @@ const getGitHubStars = async (): Promise<number | null> => {
 export const statisticsService = {
 	user: {
 		getCount: () => {
-			return getCachedCount("users", LAST_KNOWN.users, () => getCountFromDatabase(schema.user));
+			return getCachedCount("users", LAST_KNOWN.users, () => getCountFromDatabase());
 		},
 	},
 	resume: {
 		getCount: () => {
-			return getCachedCount("resumes", LAST_KNOWN.resumes, () => getCountFromDatabase(schema.resume));
+			return getCachedCount("resumes", LAST_KNOWN.resumes, () => getCountFromDatabase());
 		},
 	},
 	github: {

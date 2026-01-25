@@ -1,0 +1,43 @@
+{
+  "run": {
+    "command": "nx run-many -t serve",
+    "startTime": "2026-01-03T18:34:54.054Z",
+    "endTime": "2026-01-03T20:03:47.582Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "client:serve:development",
+      "target": "serve",
+      "projectName": "client",
+      "hash": "8862196943690646570",
+      "startTime": "2026-01-03T18:34:54.208Z",
+      "endTime": "2026-01-03T20:03:47.547Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "artboard:serve:development",
+      "target": "serve",
+      "projectName": "artboard",
+      "hash": "4811460060057171967",
+      "startTime": "2026-01-03T18:34:54.208Z",
+      "endTime": "2026-01-03T20:03:47.573Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "server:serve:development",
+      "target": "serve",
+      "projectName": "server",
+      "hash": "3875748718271613285",
+      "startTime": "2026-01-03T18:34:54.208Z",
+      "endTime": "2026-01-03T20:03:47.581Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

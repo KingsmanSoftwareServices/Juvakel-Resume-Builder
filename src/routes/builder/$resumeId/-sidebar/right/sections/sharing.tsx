@@ -13,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useConfirm } from "@/hooks/use-confirm";
 import { usePrompt } from "@/hooks/use-prompt";
-import { authClient } from "@/integrations/auth/client";
 import { orpc } from "@/integrations/orpc/client";
 import { SectionBase } from "../shared/section-base";
 
@@ -21,7 +20,6 @@ export function SharingSectionBuilder() {
 	const prompt = usePrompt();
 	const confirm = useConfirm();
 	const [_, copyToClipboard] = useCopyToClipboard();
-	const { data: session } = authClient.useSession();
 	const params = useParams({ from: "/builder/$resumeId" });
 
 	const { mutateAsync: updateResume } = useMutation(orpc.resume.update.mutationOptions());
@@ -30,9 +28,8 @@ export function SharingSectionBuilder() {
 	const { data: resume } = useSuspenseQuery(orpc.resume.getById.queryOptions({ input: { id: params.resumeId } }));
 
 	const publicUrl = useMemo(() => {
-		if (!session) return "";
-		return `${window.location.origin}/${session.user.username}/${resume.slug}`;
-	}, [session, resume]);
+		return `${window.location.origin}/r/${resume.id}`;
+	}, [resume]);
 
 	const onCopyUrl = useCallback(async () => {
 		await copyToClipboard(publicUrl);
