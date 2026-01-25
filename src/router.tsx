@@ -13,27 +13,32 @@ import { getTheme } from "./utils/theme";
 export const getRouter = async () => {
 	const queryClient = getQueryClient();
 	const basePathRaw = import.meta.env.VITE_APP_BASE_PATH ?? "/";
-	const basepath =
-		basePathRaw === "/"
-			? "/"
-			: `/${basePathRaw.replace(/^\/|\/$/g, "")}`;
+	const basepath = basePathRaw === "/" ? "/" : `/${basePathRaw.replace(/^\/|\/$/g, "")}`;
+
+	if (typeof window !== "undefined") {
+		const url = new URL(window.location.href);
+		const accessToken = url.searchParams.get("accessToken");
+		if (accessToken) {
+			localStorage.setItem("accessToken", accessToken);
+			url.searchParams.delete("accessToken");
+			window.history.replaceState({}, "", url.toString());
+		}
+	}
 
 	const [theme, locale] = await Promise.all([getTheme(), getLocale()]);
 	let session = null;
 	let flags = { disableSignups: false, disableEmailAuth: false };
 
-	if (typeof window !== "undefined") {
-		try {
-			session = await getSession();
-		} catch {
-			session = null;
-		}
+	try {
+		session = await getSession();
+	} catch {
+		session = null;
+	}
 
-		try {
-			flags = await client.flags.get();
-		} catch {
-			flags = { disableSignups: false, disableEmailAuth: false };
-		}
+	try {
+		flags = await client.flags.get();
+	} catch {
+		flags = { disableSignups: false, disableEmailAuth: false };
 	}
 
 	await loadLocale(locale);

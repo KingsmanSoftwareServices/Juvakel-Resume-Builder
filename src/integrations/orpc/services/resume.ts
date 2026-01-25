@@ -1,5 +1,5 @@
-import { env } from "@/utils/env";
 import type { ResumeData } from "@/schema/resume/data";
+import { env } from "@/utils/env";
 
 const getBackendUrl = () => env.API_BASE_URL ?? process.env.VITE_API_BASE_URL ?? "http://localhost:4000";
 

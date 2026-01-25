@@ -242,7 +242,7 @@ export function DuplicateResumeDialog({ data }: DialogProps<"resume.duplicate">)
 				closeDialog();
 
 				if (data.shouldRedirect) {
-					navigate({ to: `/builder/$resumeId`, params: { resumeId: id } });
+					navigate({ to: `/$resumeId`, params: { resumeId: id } });
 				}
 			},
 			onError: (error) => {

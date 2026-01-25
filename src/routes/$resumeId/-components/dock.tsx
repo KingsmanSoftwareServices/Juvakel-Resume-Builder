@@ -23,7 +23,7 @@ import { downloadFromUrl, downloadWithAnchor, generateFilename } from "@/utils/f
 import { cn } from "@/utils/style";
 
 export function BuilderDock() {
-	const params = useParams({ from: "/builder/$resumeId" });
+	const params = useParams({ from: "/$resumeId" });
 
 	const [_, copyToClipboard] = useCopyToClipboard();
 	const { zoomIn, zoomOut, centerView } = useControls();

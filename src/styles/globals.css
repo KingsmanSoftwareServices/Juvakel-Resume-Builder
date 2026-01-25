@@ -14,8 +14,8 @@
 	--breakpoint-4xl: 128rem;
 
 	--font-sans: "Geist Sans", "IBM Plex Sans Variable", sans-serif;
-	--font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-		monospace;
+	--font-mono:
+		"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
 	--color-zinc-925: oklch(17.55% 0 285.854);
 

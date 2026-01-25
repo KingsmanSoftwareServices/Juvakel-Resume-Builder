@@ -64,7 +64,6 @@ export function NavigationCommandGroup() {
 					<OpenAiLogoIcon />
 					<Trans>Artificial Intelligence</Trans>
 				</CommandItem>
-
 			</BaseCommandGroup>
 		</>
 	);

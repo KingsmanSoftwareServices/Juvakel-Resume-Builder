@@ -1,5 +1,5 @@
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Trans } from "@lingui/react/macro";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { ResumePreview } from "@/components/resume/preview";
 import { BuilderDock } from "./-components/dock";
 
-export const Route = createFileRoute("/builder/$resumeId/")({
+export const Route = createFileRoute("/$resumeId/")({
 	component: RouteComponent,
 });
 

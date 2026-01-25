@@ -97,9 +97,9 @@ export function Testimonials() {
 
 				<p className="max-w-4xl text-balance text-muted-foreground leading-relaxed">
 					<Trans>
-						A lot of people have written to me over the years to share their experiences with Juvakel Resume Builder and how it
-						has helped them, and I never get tired of reading them. If you have a story to share, let me know by sending
-						me an email at{" "}
+						A lot of people have written to me over the years to share their experiences with Juvakel Resume Builder and
+						how it has helped them, and I never get tired of reading them. If you have a story to share, let me know by
+						sending me an email at{" "}
 						<a
 							href={`mailto:${email}`}
 							target="_blank"

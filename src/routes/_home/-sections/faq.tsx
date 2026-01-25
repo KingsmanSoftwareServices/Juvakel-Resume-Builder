@@ -30,8 +30,8 @@ const getFaqItems = (): FAQItemData[] => [
 		question: t`Is Juvakel Resume Builder available in multiple languages?`,
 		answer: (
 			<Trans>
-				Yes, Juvakel Resume Builder is available in multiple languages. You can choose your preferred language in the settings
-				page, or using the language switcher in the top right corner. If you don't see your language, please{" "}
+				Yes, Juvakel Resume Builder is available in multiple languages. You can choose your preferred language in the
+				settings page, or using the language switcher in the top right corner. If you don't see your language, please{" "}
 				<a
 					href={crowdinUrl}
 					target="_blank"

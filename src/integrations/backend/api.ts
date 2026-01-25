@@ -45,11 +45,7 @@ axiosInstance.interceptors.response.use(
 				return Promise.reject(error);
 			}
 			try {
-				const refresh = await axios.post(
-					`${BASE_URL}/api/auth/refresh-token`,
-					{},
-					{ withCredentials: true },
-				);
+				const refresh = await axios.post(`${BASE_URL}/api/auth/refresh-token`, {}, { withCredentials: true });
 				const newAccessToken = refresh.data?.data?.accessToken;
 				if (newAccessToken && typeof window !== "undefined") {
 					localStorage.setItem("accessToken", newAccessToken);
@@ -82,19 +78,19 @@ export class BackendApi {
 	}
 
 	static async get<T>(endpoint: string, config?: AxiosRequestConfig): Promise<T> {
-		return this.request<T>(endpoint, { method: "GET", ...config });
+		return BackendApi.request<T>(endpoint, { method: "GET", ...config });
 	}
 
 	static async post<T>(endpoint: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-		return this.request<T>(endpoint, { method: "POST", data, ...config });
+		return BackendApi.request<T>(endpoint, { method: "POST", data, ...config });
 	}
 
 	static async put<T>(endpoint: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-		return this.request<T>(endpoint, { method: "PUT", data, ...config });
+		return BackendApi.request<T>(endpoint, { method: "PUT", data, ...config });
 	}
 
 	static async delete<T>(endpoint: string, config?: AxiosRequestConfig): Promise<T> {
-		return this.request<T>(endpoint, { method: "DELETE", ...config });
+		return BackendApi.request<T>(endpoint, { method: "DELETE", ...config });
 	}
 }
 

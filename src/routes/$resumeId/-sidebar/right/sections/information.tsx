@@ -17,9 +17,7 @@ export function InformationSectionBuilder() {
 							Thanks for using Juvakel Resume Builder. We're committed to helping you build standout resumes quickly and
 							consistently.
 						</p>
-						<p>
-							Reach out any time for support, feedback, or feature requests.
-						</p>
+						<p>Reach out any time for support, feedback, or feature requests.</p>
 					</Trans>
 				</div>
 

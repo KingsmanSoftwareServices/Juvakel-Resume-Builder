@@ -20,7 +20,7 @@ export function SharingSectionBuilder() {
 	const prompt = usePrompt();
 	const confirm = useConfirm();
 	const [_, copyToClipboard] = useCopyToClipboard();
-	const params = useParams({ from: "/builder/$resumeId" });
+	const params = useParams({ from: "/$resumeId" });
 
 	const { mutateAsync: updateResume } = useMutation(orpc.resume.update.mutationOptions());
 	const { mutateAsync: setPassword } = useMutation(orpc.resume.setPassword.mutationOptions());

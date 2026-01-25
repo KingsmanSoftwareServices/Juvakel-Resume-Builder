@@ -36,8 +36,7 @@ type RouterContext = {
 const appName = "Juvakel Resume Builder";
 const tagline = "Build, customize, and share resumes in minutes";
 const title = `${appName} - ${tagline}`;
-const description =
-	"Juvakel Resume Builder helps you create, customize, and share professional resumes in minutes.";
+const description = "Juvakel Resume Builder helps you create, customize, and share professional resumes in minutes.";
 
 await loadLocale(await getLocale());
 
@@ -91,18 +90,18 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				url.searchParams.delete("accessToken");
 				window.history.replaceState({}, "", url.toString());
 			}
+		}
 
-			try {
-				session = await getSession();
-			} catch {
-				session = null;
-			}
+		try {
+			session = await getSession();
+		} catch {
+			session = null;
+		}
 
-			try {
-				flags = await client.flags.get();
-			} catch {
-				flags = { disableSignups: false, disableEmailAuth: false };
-			}
+		try {
+			flags = await client.flags.get();
+		} catch {
+			flags = { disableSignups: false, disableEmailAuth: false };
 		}
 
 		return { theme, locale, session, flags };

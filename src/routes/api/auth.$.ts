@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 function handler() {
 	return new Response(
 		JSON.stringify({ success: false, message: "Authentication is handled by the backend service." }),

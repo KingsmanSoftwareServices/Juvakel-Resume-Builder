@@ -1,7 +1,7 @@
 import { ORPCError, os } from "@orpc/server";
+import type { AuthSession } from "@/integrations/auth/types";
 import { env } from "@/utils/env";
 import type { Locale } from "@/utils/locale";
-import type { AuthSession } from "@/integrations/auth/types";
 
 interface ORPCContext {
 	locale: Locale;
@@ -12,12 +12,16 @@ async function getUserFromHeaders(headers: Headers): Promise<AuthSession | null>
 	try {
 		const baseUrl = env.API_BASE_URL ?? process.env.VITE_API_BASE_URL ?? "http://localhost:4000";
 		const authHeader = headers.get("authorization");
-		if (!authHeader) return null;
+		const cookieHeader = headers.get("cookie");
+
+		const fetchHeaders = new Headers();
+		if (authHeader) fetchHeaders.set("authorization", authHeader);
+		if (cookieHeader) fetchHeaders.set("cookie", cookieHeader);
+
+		if (fetchHeaders.entries().next().done) return null;
 
 		const response = await fetch(`${baseUrl}/api/auth/profile`, {
-			headers: {
-				authorization: authHeader,
-			},
+			headers: fetchHeaders,
 		});
 
 		if (!response.ok) return null;

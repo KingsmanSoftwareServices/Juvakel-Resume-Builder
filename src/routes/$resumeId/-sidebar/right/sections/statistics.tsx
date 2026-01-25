@@ -9,7 +9,7 @@ import { orpc } from "@/integrations/orpc/client";
 import { SectionBase } from "../shared/section-base";
 
 export function StatisticsSectionBuilder() {
-	const params = useParams({ from: "/builder/$resumeId" });
+	const params = useParams({ from: "/$resumeId" });
 	const { data: statistics } = useQuery(
 		orpc.resume.statistics.getById.queryOptions({ input: { id: params.resumeId } }),
 	);

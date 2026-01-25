@@ -19,12 +19,14 @@ import { BuilderSidebarLeft } from "./-sidebar/left";
 import { BuilderSidebarRight } from "./-sidebar/right";
 import { useBuilderSidebar, useBuilderSidebarStore } from "./-store/sidebar";
 
-export const Route = createFileRoute("/builder/$resumeId")({
+export const Route = createFileRoute("/$resumeId")({
 	component: RouteComponent,
 	beforeLoad: async ({ context }) => {
-		if (typeof window !== "undefined" && !context.session) {
-			localStorage.setItem("intendedUrl", window.location.href);
-			window.location.assign(getCandidateAuthUrl(window.location.href));
+		if (!context.session) {
+			if (typeof window !== "undefined") {
+				localStorage.setItem("intendedUrl", window.location.href);
+				window.location.assign(getCandidateAuthUrl(window.location.href));
+			}
 			throw redirect({ to: "/auth", replace: true });
 		}
 		return { session: context.session };

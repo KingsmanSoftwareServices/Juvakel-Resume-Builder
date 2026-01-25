@@ -65,7 +65,7 @@ export function ResumesCommandGroup() {
 							key={resume.id}
 							value={resume.id}
 							keywords={[resume.name]}
-							onSelect={() => onNavigate(`/builder/${resume.id}`)}
+							onSelect={() => onNavigate(`/${resume.id}`)}
 						>
 							<ReadCvLogoIcon />
 							{resume.name}

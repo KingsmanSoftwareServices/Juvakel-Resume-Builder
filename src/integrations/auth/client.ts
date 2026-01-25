@@ -11,9 +11,7 @@ const unsupported = async (): AuthResult<never> => ({
 
 const getSession = async (): AuthResult<AuthSession> => {
 	try {
-		const response = await BackendApi.get<{ success: boolean; data?: AuthSession }>(
-			"/api/auth/profile",
-		);
+		const response = await BackendApi.get<{ success: boolean; data?: AuthSession }>("/api/auth/profile");
 		if (response.success && response.data) {
 			return { data: response.data };
 		}
@@ -72,8 +70,7 @@ const signInEmail = async ({
 
 const verifyTwoFactor = async ({ code }: { code: string }): AuthResult<void> => {
 	try {
-		const email =
-			typeof window !== "undefined" ? localStorage.getItem("pendingEmail") : null;
+		const email = typeof window !== "undefined" ? localStorage.getItem("pendingEmail") : null;
 		if (!email) {
 			return { error: { message: "Missing pending login email." } };
 		}
@@ -109,13 +106,7 @@ export const authClient = {
 		oauth2: unsupported,
 	},
 	signUp: {
-		email: async ({
-			email,
-			password,
-		}: {
-			email: string;
-			password: string;
-		}): AuthResult<void> => {
+		email: async ({ email, password }: { email: string; password: string }): AuthResult<void> => {
 			try {
 				await BackendApi.post("/api/auth/register", {
 					email,
@@ -145,13 +136,7 @@ export const authClient = {
 			return { error: { message: error?.message ?? "Password reset failed" } };
 		}
 	},
-	resetPassword: async ({
-		token,
-		newPassword,
-	}: {
-		token: string;
-		newPassword: string;
-	}): AuthResult<void> => {
+	resetPassword: async ({ token, newPassword }: { token: string; newPassword: string }): AuthResult<void> => {
 		try {
 			await BackendApi.post("/api/auth/reset-password", { token, password: newPassword });
 			return {};

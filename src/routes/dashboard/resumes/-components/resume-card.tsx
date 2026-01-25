@@ -101,7 +101,7 @@ export function ResumeCard({ resume, ...props }: ResumeCardProps) {
 		<div {...props}>
 			<ContextMenu>
 				<ContextMenuTrigger asChild>
-					<Link to="/builder/$resumeId" params={{ resumeId: resume.id }} className="cursor-default">
+					<Link to="/$resumeId" params={{ resumeId: resume.id }} className="cursor-default">
 						<BaseCard title={resume.name} description={t`Last updated on ${updatedAt}`} tags={resume.tags}>
 							{isLoading || !imageSrc ? (
 								<div className="flex size-full items-center justify-center">
@@ -122,7 +122,7 @@ export function ResumeCard({ resume, ...props }: ResumeCardProps) {
 
 				<ContextMenuContent>
 					<ContextMenuItem asChild>
-						<Link to="/builder/$resumeId" params={{ resumeId: resume.id }}>
+						<Link to="/$resumeId" params={{ resumeId: resume.id }}>
 							<FolderOpenIcon />
 							<Trans>Open</Trans>
 						</Link>

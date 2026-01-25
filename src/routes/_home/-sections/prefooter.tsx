@@ -27,8 +27,8 @@ export function Prefooter() {
 
 					<p className="text-muted-foreground leading-relaxed">
 						<Trans>
-							Juvakel Resume Builder is part of the Juvakel candidate portal, designed to help you create polished resumes
-							fast. Our team continuously improves the experience based on candidate feedback.
+							Juvakel Resume Builder is part of the Juvakel candidate portal, designed to help you create polished
+							resumes fast. Our team continuously improves the experience based on candidate feedback.
 						</Trans>
 					</p>
 				</motion.div>

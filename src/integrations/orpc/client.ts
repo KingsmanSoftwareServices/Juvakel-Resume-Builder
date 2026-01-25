@@ -29,10 +29,7 @@ export const getORPCClient = createIsomorphicFn()
 	})
 	.client((): RouterClient<typeof router> => {
 		const basePathRaw = import.meta.env.VITE_APP_BASE_PATH ?? "/";
-		const basepath =
-			basePathRaw === "/"
-				? "/"
-				: `/${basePathRaw.replace(/^\/|\/$/g, "")}/`;
+		const basepath = basePathRaw === "/" ? "/" : `/${basePathRaw.replace(/^\/|\/$/g, "")}/`;
 		const apiBase = import.meta.env.DEV
 			? new URL("/", window.location.origin)
 			: new URL(basepath, window.location.origin);

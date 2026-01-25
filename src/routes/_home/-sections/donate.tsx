@@ -1,13 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import {
-	HeartIcon,
-	type IconProps,
-	RocketIcon,
-	SparkleIcon,
-	UsersIcon,
-	WrenchIcon,
-} from "@phosphor-icons/react";
+import { HeartIcon, type IconProps, RocketIcon, SparkleIcon, UsersIcon, WrenchIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/style";
@@ -167,8 +160,8 @@ export const DonationBanner = () => (
 					transition={{ duration: 0.6, delay: 0.2 }}
 				>
 					<Trans>
-						Juvakel Resume Builder is part of the Juvakel candidate portal. Reach out to our team for support, guidance, or
-						feature requests.
+						Juvakel Resume Builder is part of the Juvakel candidate portal. Reach out to our team for support, guidance,
+						or feature requests.
 					</Trans>
 				</motion.p>
 			</motion.div>
@@ -228,9 +221,7 @@ export const DonationBanner = () => (
 				viewport={{ once: true }}
 				transition={{ duration: 0.6, delay: 0.8 }}
 			>
-				<Trans>
-					Thank you for choosing Juvakel Resume Builder.
-				</Trans>
+				<Trans>Thank you for choosing Juvakel Resume Builder.</Trans>
 			</motion.p>
 		</div>
 	</section>

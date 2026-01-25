@@ -36,9 +36,7 @@ const getCommunityLinks = (): FooterLinkItem[] => [
 	{ url: "https://juvakelteam.co.zw/contact", label: t`Contact` },
 ];
 
-const socialLinks: SocialLink[] = [
-	{ url: "https://juvakelteam.co.zw", label: "Juvakel", icon: GlobeIcon },
-];
+const socialLinks: SocialLink[] = [{ url: "https://juvakelteam.co.zw", label: "Juvakel", icon: GlobeIcon }];
 
 export function Footer() {
 	return (
@@ -58,9 +56,7 @@ export function Footer() {
 					<div className="space-y-2">
 						<h2 className="font-bold text-lg tracking-tight">Juvakel Resume Builder</h2>
 						<p className="max-w-xs text-muted-foreground text-sm leading-relaxed">
-							<Trans>
-								Build, customize, and share professional resumes in minutes with Juvakel.
-							</Trans>
+							<Trans>Build, customize, and share professional resumes in minutes with Juvakel.</Trans>
 						</p>
 					</div>
 
