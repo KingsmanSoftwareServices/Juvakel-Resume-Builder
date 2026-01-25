@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from "axios";
+import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000";
 
@@ -39,6 +40,10 @@ axiosInstance.interceptors.response.use(
 
 		if (error.response?.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
+			const token = getAccessToken();
+			if (!token) {
+				return Promise.reject(error);
+			}
 			try {
 				const refresh = await axios.post(
 					`${BASE_URL}/api/auth/refresh-token`,
@@ -54,7 +59,7 @@ axiosInstance.interceptors.response.use(
 			} catch {
 				clearAuthStorage();
 				if (typeof window !== "undefined") {
-					window.location.href = "/auth/login";
+					window.location.href = getCandidateAuthUrl(window.location.href, "login");
 				}
 			}
 		}

@@ -22,16 +22,18 @@ export const getRouter = async () => {
 	let session = null;
 	let flags = { disableSignups: false, disableEmailAuth: false };
 
-	try {
-		session = await getSession();
-	} catch {
-		session = null;
-	}
+	if (typeof window !== "undefined") {
+		try {
+			session = await getSession();
+		} catch {
+			session = null;
+		}
 
-	try {
-		flags = await client.flags.get();
-	} catch {
-		flags = { disableSignups: false, disableEmailAuth: false };
+		try {
+			flags = await client.flags.get();
+		} catch {
+			flags = { disableSignups: false, disableEmailAuth: false };
+		}
 	}
 
 	await loadLocale(locale);

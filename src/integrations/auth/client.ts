@@ -10,6 +10,11 @@ const unsupported = async (): AuthResult<never> => ({
 });
 
 const getSession = async (): AuthResult<AuthSession> => {
+	const accessToken =
+		typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+	if (!accessToken) {
+		return { error: { message: "No access token present." } };
+	}
 	try {
 		const response = await BackendApi.get<{ success: boolean; data?: AuthSession }>(
 			"/api/auth/profile",

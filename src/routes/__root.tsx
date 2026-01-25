@@ -83,16 +83,18 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 		let session: AuthSession | null = null;
 		let flags: FeatureFlags = { disableSignups: false, disableEmailAuth: false };
 
-		try {
-			session = await getSession();
-		} catch {
-			session = null;
-		}
+		if (typeof window !== "undefined") {
+			try {
+				session = await getSession();
+			} catch {
+				session = null;
+			}
 
-		try {
-			flags = await client.flags.get();
-		} catch {
-			flags = { disableSignups: false, disableEmailAuth: false };
+			try {
+				flags = await client.flags.get();
+			} catch {
+				flags = { disableSignups: false, disableEmailAuth: false };
+			}
 		}
 
 		return { theme, locale, session, flags };
