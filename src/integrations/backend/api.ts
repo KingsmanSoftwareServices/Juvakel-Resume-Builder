@@ -1,7 +1,22 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from "axios";
 import { getCandidateAuthUrl } from "@/utils/candidate-auth";
+import { withBasePath } from "@/utils/paths";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000";
+const getBaseUrl = () => {
+	if (typeof window === "undefined") {
+		return import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000";
+	}
+
+	// In the browser, we want to use the proxied path if VITE_API_BASE_URL is not set or is relative
+	const envBaseUrl = import.meta.env.VITE_API_BASE_URL;
+	if (envBaseUrl && envBaseUrl.startsWith("http")) {
+		return envBaseUrl;
+	}
+
+	return withBasePath("/");
+};
+
+const BASE_URL = getBaseUrl();
 
 const axiosInstance: AxiosInstance = axios.create({
 	baseURL: BASE_URL,
