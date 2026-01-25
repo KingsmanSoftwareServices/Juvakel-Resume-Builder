@@ -13,7 +13,7 @@ import { getTheme } from "./utils/theme";
 export const getRouter = async () => {
 	const queryClient = getQueryClient();
 	const basePathRaw = import.meta.env.VITE_APP_BASE_PATH ?? "/";
-	const basepath = basePathRaw === "/" ? "/" : `/${basePathRaw.replace(/^\/|\/$/g, "")}`;
+	const basepath = basePathRaw === "/" ? "/" : `/${basePathRaw.replace(/^\/|\/$/g, "")}/`;
 
 	if (typeof window !== "undefined") {
 		const url = new URL(window.location.href);
@@ -46,6 +46,7 @@ export const getRouter = async () => {
 	const router = createRouter({
 		basepath,
 		routeTree,
+		trailingSlash: "always",
 		scrollRestoration: true,
 		defaultPreload: "intent",
 		defaultViewTransition: true,

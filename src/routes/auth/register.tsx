@@ -17,18 +17,24 @@ import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 export const Route = createFileRoute("/auth/register")({
 	component: RouteComponent,
-	beforeLoad: async ({ context }) => {
+	beforeLoad: async ({ context, location }) => {
 		if (context.session) throw redirect({ to: "/dashboard", replace: true });
+
+		const returnTo = typeof window !== "undefined" ? window.location.href : new URL(location.href, process.env.APP_URL).toString();
+
 		if (context.flags.disableSignups) {
 			if (typeof window !== "undefined") {
-				window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+				window.location.assign(getCandidateAuthUrl(returnTo, "login"));
 			}
-			throw redirect({ to: "/", replace: true });
+
+			throw redirect({ href: getCandidateAuthUrl(returnTo, "login"), replace: true });
 		}
+
 		if (typeof window !== "undefined") {
-			window.location.assign(getCandidateAuthUrl(window.location.href, "register"));
+			window.location.assign(getCandidateAuthUrl(returnTo, "register"));
 		}
-		throw redirect({ to: "/", replace: true });
+
+		throw redirect({ href: getCandidateAuthUrl(returnTo, "register"), replace: true });
 	},
 });
 

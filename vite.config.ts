@@ -11,7 +11,7 @@ const normalizeBasePath = (input: string) => {
 	const trimmed = input.trim();
 	if (!trimmed || trimmed === "/") return "/";
 	const withLeading = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
-	return withLeading.endsWith("/") ? withLeading.slice(0, -1) : withLeading;
+	return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
 };
 
 const config = defineConfig(({ mode }) => {

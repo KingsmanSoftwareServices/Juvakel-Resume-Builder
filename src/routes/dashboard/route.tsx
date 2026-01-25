@@ -6,13 +6,16 @@ import { DashboardSidebar } from "./-components/sidebar";
 
 export const Route = createFileRoute("/dashboard")({
 	component: RouteComponent,
-	beforeLoad: async ({ context }) => {
+	beforeLoad: async ({ context, location }) => {
 		if (!context.session) {
+			const returnTo = typeof window !== "undefined" ? window.location.href : new URL(location.href, process.env.APP_URL).toString();
+
 			if (typeof window !== "undefined") {
-				localStorage.setItem("intendedUrl", window.location.href);
-				window.location.assign(getCandidateAuthUrl(window.location.href));
+				localStorage.setItem("intendedUrl", returnTo);
+				window.location.assign(getCandidateAuthUrl(returnTo));
 			}
-			throw redirect({ to: "/auth", replace: true });
+
+			throw redirect({ href: getCandidateAuthUrl(returnTo), replace: true });
 		}
 		return { session: context.session };
 	},

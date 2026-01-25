@@ -19,20 +19,29 @@ const searchSchema = z.object({ token: z.string().min(1) });
 export const Route = createFileRoute("/auth/reset-password")({
 	component: RouteComponent,
 	validateSearch: zodValidator(searchSchema),
-	beforeLoad: async ({ context }) => {
+	beforeLoad: async ({ context, location }) => {
+		const returnTo = typeof window !== "undefined" ? window.location.href : new URL(location.href, process.env.APP_URL).toString();
+
 		if (context.flags.disableEmailAuth) {
 			if (typeof window !== "undefined") {
-				window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+				window.location.assign(getCandidateAuthUrl(returnTo, "login"));
 			}
-			throw redirect({ to: "/", replace: true });
+
+			throw redirect({ href: getCandidateAuthUrl(returnTo, "login"), replace: true });
 		}
+
 		if (typeof window !== "undefined") {
 			const baseUrl = import.meta.env.VITE_CANDIDATE_PORTAL_URL ?? window.location.origin;
 			const resetUrl = new URL("/reset-password", baseUrl);
 			resetUrl.search = window.location.search;
 			window.location.assign(resetUrl.toString());
 		}
-		throw redirect({ to: "/", replace: true });
+
+		const baseUrl = import.meta.env.VITE_CANDIDATE_PORTAL_URL ?? process.env.APP_URL;
+		const resetUrl = new URL("/reset-password", baseUrl);
+		resetUrl.search = location.searchStr;
+
+		throw redirect({ href: resetUrl.toString(), replace: true });
 	},
 	onError: (error) => {
 		if (error instanceof SearchParamError) {

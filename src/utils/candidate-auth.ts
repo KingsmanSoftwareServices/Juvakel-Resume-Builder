@@ -1,9 +1,9 @@
+import { env } from "./env";
+
 type AuthMode = "login" | "register" | "forgot-password" | "verify-2fa";
 
 export function getCandidateAuthUrl(returnTo?: string, mode: AuthMode = "login") {
-	if (typeof window === "undefined") return "/auth";
-
-	const baseUrl = import.meta.env.VITE_CANDIDATE_PORTAL_URL ?? window.location.origin;
+	const baseUrl = import.meta.env.VITE_CANDIDATE_PORTAL_URL ?? (typeof window !== "undefined" ? window.location.origin : env.APP_URL);
 	const url = new URL("/auth", baseUrl);
 
 	if (mode) {

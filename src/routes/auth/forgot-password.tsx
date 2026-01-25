@@ -15,17 +15,22 @@ import { getCandidateAuthUrl } from "@/utils/candidate-auth";
 
 export const Route = createFileRoute("/auth/forgot-password")({
 	component: RouteComponent,
-	beforeLoad: async ({ context }) => {
+	beforeLoad: async ({ context, location }) => {
+		const returnTo = typeof window !== "undefined" ? window.location.href : new URL(location.href, process.env.APP_URL).toString();
+
 		if (context.flags.disableEmailAuth) {
 			if (typeof window !== "undefined") {
-				window.location.assign(getCandidateAuthUrl(window.location.href, "login"));
+				window.location.assign(getCandidateAuthUrl(returnTo, "login"));
 			}
-			throw redirect({ to: "/", replace: true });
+
+			throw redirect({ href: getCandidateAuthUrl(returnTo, "login"), replace: true });
 		}
+
 		if (typeof window !== "undefined") {
-			window.location.assign(getCandidateAuthUrl(window.location.href, "forgot-password"));
+			window.location.assign(getCandidateAuthUrl(returnTo, "forgot-password"));
 		}
-		throw redirect({ to: "/", replace: true });
+
+		throw redirect({ href: getCandidateAuthUrl(returnTo, "forgot-password"), replace: true });
 	},
 });
 
