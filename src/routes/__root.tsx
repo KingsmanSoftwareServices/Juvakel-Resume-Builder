@@ -84,6 +84,14 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 		let flags: FeatureFlags = { disableSignups: false, disableEmailAuth: false };
 
 		if (typeof window !== "undefined") {
+			const url = new URL(window.location.href);
+			const accessToken = url.searchParams.get("accessToken");
+			if (accessToken) {
+				localStorage.setItem("accessToken", accessToken);
+				url.searchParams.delete("accessToken");
+				window.history.replaceState({}, "", url.toString());
+			}
+
 			try {
 				session = await getSession();
 			} catch {
