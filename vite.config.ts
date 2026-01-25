@@ -14,6 +14,18 @@ const normalizeBasePath = (input: string) => {
 	return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
 };
 
+const forceCssUrlModule = () => ({
+	name: "force-css-url-module",
+	configureServer(server) {
+		server.middlewares.use((req, _res, next) => {
+			if (req.url && req.url.includes(".css?url")) {
+				req.headers.accept = "text/javascript";
+			}
+			next();
+		});
+	},
+});
+
 const config = defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), "");
 	const basePath = normalizeBasePath(env.VITE_APP_BASE_PATH ?? "/");
@@ -66,6 +78,7 @@ const config = defineConfig(({ mode }) => {
 		},
 
 		plugins: [
+			forceCssUrlModule(),
 			lingui(),
 			tailwindcss(),
 			nitro(),

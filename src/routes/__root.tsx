@@ -22,7 +22,6 @@ import { client, type orpc } from "@/integrations/orpc/client";
 import type { FeatureFlags } from "@/integrations/orpc/services/flags";
 import { getLocale, isRTL, type Locale, loadLocale } from "@/utils/locale";
 import { getTheme, type Theme } from "@/utils/theme";
-import appCss from "../styles/globals.css?url";
 
 type RouterContext = {
 	theme: Theme;
@@ -32,6 +31,10 @@ type RouterContext = {
 	session: AuthSession | null;
 	flags: FeatureFlags;
 };
+
+const basePath = import.meta.env.VITE_APP_BASE_PATH ?? "/";
+const normalizedBasePath = basePath === "/" ? "" : basePath.replace(/\/$/, "");
+const appCss = `${normalizedBasePath}/src/styles/globals.css`
 
 const appName = "Juvakel Resume Builder";
 const tagline = "Build, customize, and share resumes in minutes";
