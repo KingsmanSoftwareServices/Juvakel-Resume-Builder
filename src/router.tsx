@@ -46,7 +46,7 @@ export const getRouter = async () => {
 	const router = createRouter({
 		basepath,
 		routeTree,
-		trailingSlash: "always",
+		trailingSlash: import.meta.env.DEV ? "never" : "always",
 		scrollRestoration: true,
 		defaultPreload: "intent",
 		defaultViewTransition: true,
