@@ -27,10 +27,10 @@ type AIStore = AIStoreState & AIStoreActions;
 
 const initialState: AIStoreState = {
 	enabled: false,
-	provider: "openai",
-	model: "",
+	provider: "ollama",
+	model: "juvakel-email",
 	apiKey: "",
-	baseURL: "",
+	baseURL: "http://juvakel-ollama:11434",
 	testStatus: "unverified",
 };
 

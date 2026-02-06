@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/react/macro";
-import { ORPCError } from "@orpc/client";
+import { BackendError } from "@/integrations/backend/client";
 import { DownloadSimpleIcon } from "@phosphor-icons/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/$username/$slug")({
 			return { resume };
 		} catch (error) {
 			if (
-				(error instanceof ORPCError && error.code === "NEED_PASSWORD") ||
+				(error instanceof BackendError && error.code === "NEED_PASSWORD") ||
 				(error instanceof Error && error.message.includes("Password"))
 			) {
 				throw redirect({
