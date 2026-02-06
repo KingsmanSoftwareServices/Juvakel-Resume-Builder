@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { ORPCError } from "@orpc/client";
+import { BackendError } from "@/integrations/backend/client";
 import { EyeIcon, EyeSlashIcon, LockOpenIcon } from "@phosphor-icons/react";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, redirect, SearchParamError, useNavigate } from "@tanstack/react-router";
@@ -70,7 +70,7 @@ function RouteComponent() {
 					navigate({ to: redirect, replace: true });
 				},
 				onError: (error) => {
-					if (error instanceof ORPCError && error.code === "INVALID_PASSWORD") {
+					if (error instanceof BackendError && error.code === "INVALID_PASSWORD") {
 						toast.dismiss(toastId);
 						form.setError("password", { message: t`The password you entered is incorrect` });
 					} else {

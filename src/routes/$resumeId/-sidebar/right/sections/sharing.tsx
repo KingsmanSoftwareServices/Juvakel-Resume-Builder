@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { ORPCError } from "@orpc/client";
+import { BackendError } from "@/integrations/backend/client";
 import { ClipboardIcon, LockSimpleIcon, LockSimpleOpenIcon } from "@phosphor-icons/react";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
@@ -41,7 +41,7 @@ export function SharingSectionBuilder() {
 			try {
 				await updateResume({ id: resume.id, isPublic: checked });
 			} catch (error) {
-				const message = error instanceof ORPCError ? error.message : t`Something went wrong. Please try again.`;
+				const message = error instanceof BackendError ? error.message : t`Something went wrong. Please try again.`;
 				toast.error(message);
 			}
 		},
@@ -69,7 +69,7 @@ export function SharingSectionBuilder() {
 			await setPassword({ id: resume.id, password });
 			toast.success(t`Password protection has been enabled.`, { id: toastId });
 		} catch (error) {
-			const message = error instanceof ORPCError ? error.message : t`Something went wrong. Please try again.`;
+			const message = error instanceof BackendError ? error.message : t`Something went wrong. Please try again.`;
 			toast.error(message, { id: toastId });
 		}
 	}, [prompt, resume.id, setPassword]);
@@ -90,7 +90,7 @@ export function SharingSectionBuilder() {
 			await removePassword({ id: resume.id });
 			toast.success(t`Password protection has been disabled.`, { id: toastId });
 		} catch (error) {
-			const message = error instanceof ORPCError ? error.message : t`Something went wrong. Please try again.`;
+			const message = error instanceof BackendError ? error.message : t`Something went wrong. Please try again.`;
 			toast.error(message, { id: toastId });
 		}
 	}, [confirm, resume.id, resume.hasPassword, removePassword]);

@@ -55,14 +55,7 @@ function PictureSectionForm() {
 	const onDeletePicture = () => {
 		if (!picture.url) return;
 
-		const appOrigin = window.location.origin;
-		const pictureOrigin = new URL(picture.url).origin;
-
-		const filename = picture.url.split("/").pop();
-		if (!filename) return;
-
-		// If the picture is from the same origin, attempt to delete it
-		if (pictureOrigin === appOrigin) deleteFile({ filename });
+		deleteFile({ url: picture.url });
 
 		form.setValue("url", "", { shouldDirty: true });
 		form.handleSubmit(onSubmit)();
