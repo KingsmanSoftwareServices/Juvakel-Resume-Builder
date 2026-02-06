@@ -68,8 +68,8 @@ export const printerService = {
 	 * 6. Generate the PDF with proper dimensions and margins
 	 * 7. Upload to storage and return the URL
 	 */
-	printResumeAsPDF: async (input: { userId: string; id: string; data: any }): Promise<string> => {
-		const { id, userId, data } = input;
+	printResumeAsPDF: async (input: { userId: string; id: string; data: any; reqHeaders?: Headers }): Promise<string> => {
+		const { id, userId, data, reqHeaders } = input;
 
 		// Step 1: Delete any existing PDF for this resume to ensure fresh generation
 		const storageService = getStorageService();
@@ -110,6 +110,15 @@ export const printerService = {
 			await browser.setCookie({ name: "locale", value: locale, domain });
 
 			const page = await browser.newPage();
+
+			const authorization = reqHeaders?.get("authorization");
+			const cookie = reqHeaders?.get("cookie");
+			if (authorization || cookie) {
+				await page.setExtraHTTPHeaders({
+					...(authorization ? { authorization } : {}),
+					...(cookie ? { cookie } : {}),
+				});
+			}
 
 			// Wait for the page to fully load (network idle + custom loaded attribute)
 			await page.setViewport(pageDimensions[format]);
@@ -192,8 +201,8 @@ export const printerService = {
 		}
 	},
 
-	getResumeScreenshot: async (input: { userId: string; id: string; data: any }): Promise<string> => {
-		const { id, userId, data } = input;
+	getResumeScreenshot: async (input: { userId: string; id: string; data: any; reqHeaders?: Headers }): Promise<string> => {
+		const { id, userId, data, reqHeaders } = input;
 
 		const storageService = getStorageService();
 		const screenshotPrefix = `uploads/${userId}/screenshots/${id}`;
@@ -237,6 +246,15 @@ export const printerService = {
 			await browser.setCookie({ name: "locale", value: locale, domain });
 
 			const page = await browser.newPage();
+
+			const authorization = reqHeaders?.get("authorization");
+			const cookie = reqHeaders?.get("cookie");
+			if (authorization || cookie) {
+				await page.setExtraHTTPHeaders({
+					...(authorization ? { authorization } : {}),
+					...(cookie ? { cookie } : {}),
+				});
+			}
 
 			await page.setViewport(pageDimensions.a4);
 			await page.goto(url, { waitUntil: "networkidle0" });

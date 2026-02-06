@@ -87,7 +87,7 @@ export function Statistics() {
 		queries: [orpc.statistics.user.getCount.queryOptions(), orpc.statistics.resume.getCount.queryOptions()],
 	});
 
-	if (!userCountResult.data || !resumeCountResult.data) return null;
+	if (userCountResult.data == null || resumeCountResult.data == null) return null;
 
 	return (
 		<section id="statistics" aria-labelledby="stats-heading">

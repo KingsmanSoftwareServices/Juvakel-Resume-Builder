@@ -5,7 +5,7 @@ import { z } from "zod";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { ResumePreview } from "@/components/resume/preview";
 import { useResumeStore } from "@/components/resume/store/resume";
-import { getORPCClient } from "@/integrations/orpc/client";
+import { backendRequest } from "@/integrations/backend/client";
 import { env } from "@/utils/env";
 import { verifyPrinterToken } from "@/utils/printer-token";
 
@@ -29,8 +29,8 @@ export const Route = createFileRoute("/printer/$resumeId")({
 		}
 	},
 	loader: async ({ params }) => {
-		const client = getORPCClient();
-		const resume = await client.resume.getByIdForPrinter({ id: params.resumeId });
+		const response = await backendRequest<{ data: any }>(`/api/resumes/${params.resumeId}`, { method: "GET" });
+		const resume = (response as { data?: any }).data ?? response;
 
 		return { resume };
 	},
